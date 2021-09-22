@@ -58,7 +58,7 @@
     
     <category term="日语" scheme="http://example.com/tags/%E6%97%A5%E8%AF%AD/"/>
     
-    <category term="语法" scheme="http://example.com/tags/%E8%AF%AD%E6%B3%95/"/>
+    <category term="语法学习" scheme="http://example.com/tags/%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -127,7 +127,7 @@
     
     <category term="日语" scheme="http://example.com/tags/%E6%97%A5%E8%AF%AD/"/>
     
-    <category term="语法" scheme="http://example.com/tags/%E8%AF%AD%E6%B3%95/"/>
+    <category term="语法学习" scheme="http://example.com/tags/%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

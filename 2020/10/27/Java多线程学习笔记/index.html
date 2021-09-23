@@ -179,7 +179,7 @@
 </li>
 </ul>
 <p>另外一个重要区别是，<strong>进程是操作系统进行资源分配的基本单位，而线程是操作系统进行调度的基本单位</strong>，即CPU分配时间的单位 。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="http://save.yeding.top/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F.png1605341567231"><br>从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的<strong>堆</strong>和<strong>方法区 (JDK1.8 之后的元空间)**资源，但是每个线程有自己的**程序计数器</strong>、<strong>虚拟机栈</strong> 和 <strong>本地方法栈</strong>。</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/JVM_Runtime_DataFiled.png"><br>从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的<strong>堆</strong>和<strong>方法区 (JDK1.8 之后的元空间)**资源，但是每个线程有自己的**程序计数器</strong>、<strong>虚拟机栈</strong> 和 <strong>本地方法栈</strong>。</p>
 <p><strong>总结：</strong> <strong>线程是进程划分成的更小的运行单位。线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响。线程执行开销小，但不利于资源的管理和保护；而进程正相反。</strong></p>
 <h3 id="Java线程状态切换"><a href="#Java线程状态切换" class="headerlink" title="Java线程状态切换"></a>Java线程状态切换</h3><p>Java线程模型定义了 6 种状态，在任意一个时间点，一个线程有且只有其中一个状态：</p>
 <ul>
@@ -190,10 +190,11 @@
 <li><code>阻塞（Blocked）</code>：在等待获得排他锁。</li>
 <li><code>结束（Terminated）</code>：已终止的线程。</li>
 </ul>
-<p> <img src= "/image/loading.gif" data-lazy-src="https://hadyang.github.io/interview/docs/java/concurrent/thread/images/thread_status.jpg" alt="img"> </p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/thread_status.jpg"> </p>
 <h3 id="线程死锁"><a href="#线程死锁" class="headerlink" title="线程死锁"></a>线程死锁</h3><p>线程死锁描述的是这样一种情况：多个线程同时被阻塞，它们中的一个或者全部都在等待某个资源被释放。由于线程被无限期地阻塞，因此程序不可能正常终止。</p>
 <p>如下图所示，线程 A 持有资源 2，线程 B 持有资源 1，他们同时都想申请对方的资源，所以这两个线程就会互相等待而进入死锁状态。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="http://save.yeding.top/2019-4%E6%AD%BB%E9%94%811.png1605341520421" alt="线程死锁示意图 "><br>产生死锁必须具备以下四个条件：</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/2019-4%E6%AD%BB%E9%94%811.png" alt="线程死锁示意图 "></p>
+<p>产生死锁必须具备以下四个条件：</p>
 <ol>
 <li>互斥条件：该资源任意一个时刻只由一个线程占用。</li>
 <li>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。</li>
@@ -218,7 +219,7 @@
 </blockquote>
 <p>在早期的 CPU 当中，是通过在总线上加<code>LOCK#</code>锁的形式来解决缓存不一致的问题。因为 CPU 和其他部件进行通信都是通过总线来进行的，如果对总线加LOCK#锁的话，也就是说阻塞了其他 CPU 对其他部件访问（如内存），从而使得只能有一个 CPU 能使用这个变量的内存。比如上面例子中 如果一个线程在执行 <code>i = i +1</code>，如果在执行这段代码的过程中，在总线上发出了<code>LCOK#</code>锁的信号，那么只有等待这段代码完全执行完毕之后，其他CPU才能从变量i所在的内存读取变量，然后进行相应的操作。这样就解决了缓存不一致的问题。但是上面的方式会有一个问题，<strong>由于在锁住总线期间，其他CPU无法访问内存，导致效率低下</strong>。</p>
 <p>所以就出现了缓存一致性协议。最出名的就是 Intel 的<code>MESI协议</code>，<code>MESI协议</code>保证了每个缓存中使用的共享变量的副本是一致的。它核心的思想是：<strong>当CPU写数据时，如果发现操作的变量是共享变量，即在其他CPU中也存在该变量的副本，会发出信号通知其他CPU将该变量的缓存行置为无效状态，因此当其他CPU需要读取这个变量时，发现自己缓存中缓存该变量的缓存行是无效的，那么它就会从内存重新读取</strong>。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://hadyang.github.io/interview/docs/java/concurrent/volatile/images/volatile_1.jpg" alt="img"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/volatile_1.jpg"></p>
 <h2 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h2><p>在Java虚拟机规范中试图定义一种Java内存模型（<code>Java Memory Model，JMM</code>）来屏蔽各个硬件平台和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。那么Java内存模型规定了程序中变量的访问规则，往大一点说是定义了程序执行的次序。<strong>注意，为了获得较好的执行性能，Java内存模型并没有限制执行引擎使用处理器的寄存器或者高速缓存来提升指令执行速度，也没有限制编译器对指令进行重排序。也就是说，在java内存模型中，也会存在缓存一致性问题和指令重排序的问题</strong>。</p>
 <p><strong>Java内存模型规定所有的变量都是存在主存当中（类似于前面说的物理内存），每个线程都有自己的工作内存（类似于前面的高速缓存）。线程对变量的所有操作都必须在工作内存中进行，而不能直接对主存进行操作。并且每个线程不能访问其他线程的工作内存</strong>。</p>
 <p>在Java中，执行下面这个语句：</p>
@@ -357,8 +358,8 @@
 <p>当一个线程试图访问同步代码块时，它首先必须得到锁，退出或抛出异常时必须释放锁。</p>
 <h2 id="锁的升级"><a href="#锁的升级" class="headerlink" title="锁的升级"></a>锁的升级</h2><p>目前锁一共有4种状态，级别从低到高依次是：无锁、偏向锁、轻量级锁和重量级锁。锁状态只能升级不能降级。</p>
 <h3 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h3><p>大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得。偏向锁是为了在只有一个线程执行同步块时提高性能。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://hadyang.github.io/interview/docs/java/concurrent/synchronized/assists/biased_lock.svg" alt="biased_lock"></p>
-<h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><p><img src= "/image/loading.gif" data-lazy-src="https://hadyang.github.io/interview/docs/java/concurrent/synchronized/assists/light_lock.svg" alt="img"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/biased_lock.svg" alt="biased_lock"></p>
+<h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/light_lock.svg" alt="img"></p>
 <p>这里解释下其中几个重要的步骤：</p>
 <ul>
 <li>复制 Mark Word 到锁记录：拷贝对象头中的 Mark Word 到锁记录中。</li>
@@ -366,7 +367,7 @@
 </ul>
 <h3 id="重量级锁"><a href="#重量级锁" class="headerlink" title="重量级锁"></a>重量级锁</h3><p>在重量级锁的状态下， JVM 基于进入和退出 <code>Monitor</code> 对象来实现方法同步和代码块同步，<code>Monitor</code> 的引用存储在对象头中。</p>
 <p><code>Monitor</code> 本身是依赖与操作系统的互斥锁（mutex lock）实现的。由于 JVM 线程是映射到操作系统的原生线程之上的，如果要阻塞或唤醒一条线程，都需要操作系统来帮忙完成，这就需要从用户态转换到核心态中，因此这种转换需要耗费很多的 CPU 时间。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://hadyang.github.io/interview/docs/java/concurrent/synchronized/assists/monitor_lock.svg" alt="img"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/monitor_lock.svg" alt="img"></p>
 <h2 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h2><p>同步块的作用范围应该尽可能小，仅在共享数据的实际作用域中才进行同步，这样做的目的是为了使需要同步的操作数量尽可能缩小，缩短阻塞时间，如果存在锁竞争，那么等待锁的线程也能尽快拿到锁。 </p>
 <p>但是加锁解锁也需要消耗资源，如果存在一系列的连续加锁解锁操作，可能会导致不必要的性能损耗。 <strong>锁粗化就是 JVM 将多个连续的加锁、解锁操作连接在一起</strong>，扩展成一个范围更大的锁，避免频繁的加锁解锁操作。</p>
 <h2 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h2><p>Java 虚拟机在 JIT 编译时(可以简单理解为当某段代码即将第一次被执行时进行编译，又称即时编译)，通过对运行上下文的扫描，经过逃逸分析，<strong>去除不可能存在共享资源竞争的锁，通过这种方式消除没有必要的锁</strong>，可以节省毫无意义的请求锁时间</p>

@@ -150,10 +150,10 @@
     detectApple()
     document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/css/index.min.css"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Yeding's Blog" type="application/atom+xml">
 </head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/image/loading.gif" data-lazy-src="https://s1.ax1x.com/2020/09/13/w0t8qe.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/89478039_p0.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yeding's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JVM入门笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-18T03:29:05.000Z" title="发表于 2020-09-18 11:29:05">2020-09-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-14T00:14:03.000Z" title="更新于 2020-11-14 08:14:03">2020-11-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">873</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM入门笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>JVM是Java Virtual Machine（Java<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E6%9C%BA">虚拟机</a>）的缩写。引入Java语言虚拟机后，Java语言在不同平台上运行时不需要重新编译。Java语言<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F/8290180">编译程序</a>只需生成在Java虚拟机上运行的目标代码（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%97%E8%8A%82%E7%A0%81/9953683">字节码</a>），就可以在多种平台上不加修改地运行。</p>
-<h1 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h1><p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6498ee160a154a674b279d.png" alt="1600057387085"></p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6498ee160a154a674b2798.png" alt="1600059800714"></p>
+<h1 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h1><p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6498ee160a154a674b279d.png"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6498ee160a154a674b2798.png"></p>
 <h1 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h1><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>加载Class文件 - new student（）</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6498ee160a154a674b279a.png" alt="1600082834324"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6498ee160a154a674b279a.png"></p>
 <h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><ol>
 <li>虚拟机自带的加载器</li>
 <li>启动类（根）加载器</li>
@@ -167,7 +167,7 @@
 <blockquote>
 <p>栈中的数据都是以栈帧（Stack Frame）的格式存在，栈帧是一个内存区块，是一个数据集，是一个有关方法 (Method) 和运行期数据的数据集，当一个方法A被调用时就产生了一个栈帧 F1，并被压入到栈中 </p>
 </blockquote>
-<p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6497cd160a154a674adf2e.png" alt="1600145563686"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6497cd160a154a674adf2e.png"></p>
 <h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><p>Heap，一个JVM只有一个堆内存，堆内存的大小是可以调节的</p>
 <p>类加载器读取了类文件后，会将类，方法，常量，变量，和所有引用类型的真实对象保存在堆中</p>
 <p>堆存在垃圾回收机制。</p>
@@ -180,7 +180,7 @@
 <li><p>元方法（原 永久代）</p>
 </li>
 </ul>
-<p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6497cd160a154a674adf33.png" alt="1600164510922"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6497cd160a154a674adf33.png"></p>
 <p>GC垃圾回收，主要在新生代和老年代</p>
 <p>内存满了会爆OOM错误</p>
 <p>99%都是临时对象</p>
@@ -196,9 +196,9 @@
 <p>jdk6及以前：永久代，常量池是在方法区</p>
 <p>jdk7：永久代退化，常量池在堆中</p>
 <p>jdk8：无永久代，常量池在元空间</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6497cd160a154a674adf1f.png" alt="1600319804207"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6497cd160a154a674adf1f.png"></p>
 <h2 id="堆内存调优"><a href="#堆内存调优" class="headerlink" title="堆内存调优"></a>堆内存调优</h2><h1 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h1><p>JVM在进行GC（垃圾回收）时，分为三个区域，：新生区，幸存区，老年区，GC两种类：轻GC，重GC</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6497cd160a154a674adf22.png" alt="1600320073252"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6497cd160a154a674adf22.png"></p>
 <p>题目：</p>
 <ul>
 <li>JVM内存模型和分区</li>
@@ -206,21 +206,21 @@
 <li>GC算法有哪些</li>
 <li>轻重GC什么时候发生</li>
 </ul>
-<h2 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h2><p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6497cd160a154a674adf29.png" alt="1600320272622"></p>
-<h2 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h2><p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6499a0160a154a674b506b.png" alt="1600320444844"></p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6499a0160a154a674b506d.png" alt="1600320529537"></p>
+<h2 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h2><p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6497cd160a154a674adf29.png"></p>
+<h2 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h2><p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6499a0160a154a674b506b.png"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6499a0160a154a674b506d.png"></p>
 <ul>
 <li>好处：没有内存的碎片</li>
 <li>坏处：浪费了内存空间~多了一半空间永远是空的。</li>
 </ul>
 <p>复制算法最佳使用场景：对象存货度较低的时候：新生区~</p>
-<h2 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h2><p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6499a0160a154a674b5072.png" alt="1600320929565"></p>
+<h2 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h2><p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6499a0160a154a674b5072.png"></p>
 <ul>
 <li>优点：不需要额外的空间！</li>
 <li>缺点：两次扫描，严重浪费时间，会产生内存碎片，hash</li>
 </ul>
 <h2 id="标记压缩算法"><a href="#标记压缩算法" class="headerlink" title="标记压缩算法"></a>标记压缩算法</h2><p>对标记清除算法的再优化</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f6499a0160a154a674b5077.png" alt="1600321084280"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6499a0160a154a674b5077.png"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>内存效率：复制算法&gt;标记清除算法&gt;标记压缩算法（时间复杂度）</p>
 <p>内存整齐度：复制算法=标记压缩算法&gt;标记清除算法</p>
 <p>内存利用率:标记压缩算法=标记清除算法&gt;复制算法</p>

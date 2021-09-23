@@ -230,7 +230,7 @@
 <li><strong>前缀索引(Prefix)</strong> ：前缀索引只适用于字符串类型的数据。前缀索引是对文本的前几个字符创建索引，相比普通索引建立的数据更小， 因为只取前几个字符。</li>
 <li><strong>全文索引(Full Text)</strong> ：全文索引主要是为了检索大文本数据中的关键字的信息，是目前搜索引擎数据库使用的一种技术。Mysql5.6之前只有MYISAM引擎支持全文索引，5.6之后InnoDB也支持了全文索引。</li>
 </ol>
-<p>二级索引: <img src= "/image/loading.gif" data-lazy-src="https://pic.downk.cc/item/5f67652b160a154a670a5295.png" alt="B+树"></p>
+<p>二级索引: <img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f67652b160a154a670a5295.png" alt="B+树"></p>
 <h2 id="2-5聚集索引与非聚集索引"><a href="#2-5聚集索引与非聚集索引" class="headerlink" title="2.5聚集索引与非聚集索引"></a>2.5聚集索引与非聚集索引</h2><h3 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h3><p><strong>聚集索引即索引结构和数据一起存放的索引。主键索引属于聚集索引。</strong></p>
 <p>在 Mysql 中，InnoDB引擎的表的 <code>.ibd</code>文件就包含了该表的索引和数据，对于 InnoDB 引擎表来说，该表的索引(B+树)的每个非叶子节点存储索引，叶子节点存储索引和索引对应的数据。</p>
 <h4 id="聚集索引的优点"><a href="#聚集索引的优点" class="headerlink" title="聚集索引的优点"></a>聚集索引的优点</h4><p>聚集索引的查询速度非常的快，因为整个B+树本身就是一颗多叉平衡树，叶子节点也都是有序的，定位到索引的节点，就相当于定位到了数据。</p>
@@ -250,9 +250,9 @@
 <li><strong>可能会二次查询(回表)</strong> :这应该是非聚集索引最大的缺点了。 当查到索引对应的指针或主键后，可能还需要根据指针或主键再到数据文件或表中查询。</li>
 </ol>
 <p>这是Mysql的表的文件截图:</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://snailclimb.gitee.io/javaguide/media/pictures/database/Mysql%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E6%88%AA%E5%9B%BE.png" alt="Mysql表文件截图"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/Mysql%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E6%88%AA%E5%9B%BE.png" alt="Mysql表文件截图"></p>
 <p>聚集索引和非聚集索引:</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://snailclimb.gitee.io/javaguide/media/pictures/database/B+%E6%A0%91%E7%B4%A2%E5%BC%95.png" alt="B+树"></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/B+%E6%A0%91%E7%B4%A2%E5%BC%95.png" alt="B+树"></p>
 <h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><p>如果一个索引包含（或者说覆盖）所有需要查询的字段的值，我们就称之为“覆盖索引”。我们知道在InnoDB存储引擎中，如果不是主键索引，叶子节点存储的是主键+列值。最终还是要“回表”，也就是要通过主键再查找一次。这样就会比较慢覆盖索引就是把要查询出的列和索引是对应的，不做回表操作！</p>
 <p><strong>覆盖索引即需要查询的字段正好是索引的字段，那么直接根据该索引，就可以查到数据了， 而无需回表查询。</strong></p>
 <blockquote>

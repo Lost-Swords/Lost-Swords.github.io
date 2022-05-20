@@ -206,7 +206,7 @@
 <li>关键字的个数n满足：ceil(m/2)-1 &lt;= n &lt;= m-1  ki(i=1,…n)为关键字，且关键字升序排序。</li>
 <li>Pi(i=1,…n)为指向子树根节点的指针。P(i-1)指向的子树的所有节点关键字均小于ki，但都大于k(i-1)</li>
 </ol>
-<p><img src= "/image/loading.gif" data-lazy-src="http://save.yeding.top/20160202204827368.jpg1601883760211" alt="索引" /></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/b-tree.jpg" alt="索引" /></p>
 <blockquote>
 <p>b+tree</p>
 </blockquote>
@@ -216,7 +216,7 @@
 <li>所有叶子节点之间都有一个链指针。</li>
 <li>数据记录都存放在叶子节点中。</li>
 </ol>
-<p><img src= "/image/loading.gif" data-lazy-src="http://save.yeding.top/20160202205105560.jpg1601883973866" alt="索引" title="索引" /></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/b+tree.jpg" alt="索引" title="索引" /></p>
 <blockquote>
 <p>hash表</p>
 </blockquote>
@@ -276,7 +276,7 @@
 <p>如主键索引，如果一条SQL需要查询主键，那么正好根据主键索引就可以查到主键。</p>
 <p>再如普通索引，如果一条SQL需要查询name，name字段正好有索引， 那么直接根据这个索引就可以查到数据，也无需回表。</p>
 </blockquote>
-<p>覆盖索引: <img src= "/image/loading.gif" data-lazy-src="https://snailclimb.gitee.io/javaguide/media/pictures/database/B+%E6%A0%91%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95.png" alt="B+树覆盖索引" /></p>
+<p>覆盖索引: <img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/20210420165341868.png" alt="B+树覆盖索引" /></p>
 <h2 id="26最左前缀原则"><a class="markdownIt-Anchor" href="#26最左前缀原则"></a> 2.6最左前缀原则</h2>
 <p>MySQL中的索引可以以一定顺序引用多列，这种索引叫作联合索引。如User表的name和city加联合索引就是(name,city)，而最左前缀原则指的是，如果查询的时候查询条件精确匹配索引的左边连续一列或几列，则此列就可以被用到。如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> name<span class="operator">=</span>xx <span class="keyword">and</span> city<span class="operator">=</span>xx ; ／／可以命中索引</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> name<span class="operator">=</span>xx ; <span class="operator">/</span><span class="operator">/</span> 可以命中索引</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> city<span class="operator">=</span>xx ; <span class="operator">/</span><span class="operator">/</span> 无法命中索引            <span class="keyword">Copy</span> <span class="keyword">to</span> clipboardErrorCopied</span><br></pre></td></tr></table></figure>

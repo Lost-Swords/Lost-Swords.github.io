@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.yeding.top/post/53fc1dd0eb8a/</loc>
+    
+    <lastmod>2022-08-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.yeding.top/link/index.html</loc>
     
     <lastmod>2022-08-03</lastmod>
@@ -20,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://www.yeding.top/categories/index.html</loc>
+    <loc>https://www.yeding.top/about/index.html</loc>
     
     <lastmod>2022-08-03</lastmod>
     
@@ -29,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://www.yeding.top/about/index.html</loc>
+    <loc>https://www.yeding.top/categories/index.html</loc>
     
     <lastmod>2022-08-03</lastmod>
     
@@ -151,13 +160,6 @@
   </url>
   
   <url>
-    <loc>https://www.yeding.top/tags/Hexo/</loc>
-    <lastmod>2022-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.yeding.top/tags/MYSQL/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -166,6 +168,13 @@
   
   <url>
     <loc>https://www.yeding.top/tags/SpringBoot/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yeding.top/tags/Hexo/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -215,6 +224,13 @@
   
   <url>
     <loc>https://www.yeding.top/tags/%E7%90%86%E8%AE%BA/</loc>
+    <lastmod>2022-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yeding.top/tags/%E9%9F%B3%E4%B9%90/</loc>
     <lastmod>2022-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

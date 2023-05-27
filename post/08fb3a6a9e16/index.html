@@ -1,20 +1,7 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Java多线程学习笔记 | Yeding's Blog</title><meta name="keywords" content="Hexo，博文"><meta name="author" content="叶町"><meta name="copyright" content="叶町"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Java多线程学习记录">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java多线程学习笔记">
-<meta property="og:url" content="https://www.yeding.top/post/08fb3a6a9e16/index.html">
-<meta property="og:site_name" content="Yeding&#39;s Blog">
-<meta property="og:description" content="Java多线程学习记录">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6496f6160a154a674aaf48.jpg">
-<meta property="article:published_time" content="2020-10-26T18:39:32.000Z">
-<meta property="article:modified_time" content="2020-11-14T00:12:56.000Z">
-<meta property="article:author" content="叶町">
-<meta property="article:tag" content="Java">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6496f6160a154a674aaf48.jpg"><link rel="shortcut icon" href="/img/webicon.jpg"><link rel="canonical" href="https://www.yeding.top/post/08fb3a6a9e16/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="msvalidate.01" content="278990AE0B56A7C826F87D7039A44A00"/><meta name="baidu-site-verification" content="code-c3G2TgtwfW"/><meta name="google-site-verification" content="_ae3149Ou1MfIkiKfOmwwj3AqiMp6ahEt9MT8YTVmtY"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Java多线程学习笔记 | Yeding's Blog</title><meta name="author" content="叶町"><meta name="copyright" content="叶町"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Java多线程学习记录"><link rel="shortcut icon" href="/img/webicon.jpg"><link rel="canonical" href="https://www.yeding.top/post/08fb3a6a9e16/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="msvalidate.01" content="278990AE0B56A7C826F87D7039A44A00"/><meta name="baidu-site-verification" content="code-c3G2TgtwfW"/><meta name="google-site-verification" content="_ae3149Ou1MfIkiKfOmwwj3AqiMp6ahEt9MT8YTVmtY"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
   noticeOutdate: undefined,
   highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
@@ -28,7 +15,7 @@
     post: false
   },
   runtime: '天',
-  date_suffix: {
+  dateSuffix: {
     just: '刚刚',
     min: '分钟前',
     hour: '小时前',
@@ -46,7 +33,12 @@
   },
   isPhotoFigcaption: true,
   islazyload: true,
-  isAnchor: true
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
   title: 'Java多线程学习笔记',
   isPost: true,
@@ -110,6 +102,21 @@
       document.head.appendChild(script)
     })
   
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
       win.activateDarkMode = function () {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
@@ -142,8 +149,8 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="https://testingcf.jsdelivr.net/gh/Lost-Swords/ImageLibrary/css/index.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_2829204_gazvsq5039v.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Yeding's Blog" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/image/loading.gif" data-lazy-src="https://s1.ax1x.com/2020/09/13/w0t8qe.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6496f6160a154a674aaf48.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yeding's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java多线程学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-10-26T18:39:32.000Z" title="发表于 2020-10-27 02:39:32">2020-10-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-14T00:12:56.000Z" title="更新于 2020-11-14 08:12:56">2020-11-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java多线程学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1基本概念"><a class="markdownIt-Anchor" href="#1基本概念"></a> 1.基本概念</h1>
+    })(window)</script><link rel="stylesheet" href="https://image.yeding.top/css/index.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_2829204_gazvsq5039v.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Yeding's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/image/loading.gif" data-lazy-src="https://s1.ax1x.com/2020/09/13/w0t8qe.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://image.yeding.top/img/5f6496f6160a154a674aaf48.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Yeding's Blog"><span class="site-name">Yeding's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java多线程学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-10-26T18:39:32.000Z" title="发表于 2020-10-27 02:39:32">2020-10-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-14T00:12:56.000Z" title="更新于 2020-11-14 08:12:56">2020-11-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java多线程学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1基本概念"><a class="markdownIt-Anchor" href="#1基本概念"></a> 1.基本概念</h1>
 <p>程序：</p>
 <blockquote>
 <p>用某种编程语言(java、python等)编写，能够完成一定任务或者功能的代码集合,是指令和数据的有序集合，是<strong>一段静态代码</strong>。</p>
@@ -181,7 +188,7 @@
 </li>
 </ul>
 <p>另外一个重要区别是，<strong>进程是操作系统进行资源分配的基本单位，而线程是操作系统进行调度的基本单位</strong>，即CPU分配时间的单位 。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/JVM_Runtime_DataFiled.png" alt="" /><br />
+<p><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/JVM_Runtime_DataFiled.png" alt="" /><br />
 从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的<strong>堆</strong>和<strong>方法区 (JDK1.8 之后的元空间)**资源，但是每个线程有自己的</strong>程序计数器**、<strong>虚拟机栈</strong> 和 <strong>本地方法栈</strong>。</p>
 <p><strong>总结：</strong> <strong>线程是进程划分成的更小的运行单位。线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响。线程执行开销小，但不利于资源的管理和保护；而进程正相反。</strong></p>
 <h3 id="java线程状态切换"><a class="markdownIt-Anchor" href="#java线程状态切换"></a> Java线程状态切换</h3>
@@ -194,11 +201,11 @@
 <li><code>阻塞（Blocked）</code>：在等待获得排他锁。</li>
 <li><code>结束（Terminated）</code>：已终止的线程。</li>
 </ul>
-<p><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/thread_status.jpg" alt="" /></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/thread_status.jpg" alt="" /></p>
 <h3 id="线程死锁"><a class="markdownIt-Anchor" href="#线程死锁"></a> 线程死锁</h3>
 <p>线程死锁描述的是这样一种情况：多个线程同时被阻塞，它们中的一个或者全部都在等待某个资源被释放。由于线程被无限期地阻塞，因此程序不可能正常终止。</p>
 <p>如下图所示，线程 A 持有资源 2，线程 B 持有资源 1，他们同时都想申请对方的资源，所以这两个线程就会互相等待而进入死锁状态。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/2019-4%E6%AD%BB%E9%94%811.png" alt="线程死锁示意图 " /></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/2019-4%E6%AD%BB%E9%94%811.png" alt="线程死锁示意图 " /></p>
 <p>产生死锁必须具备以下四个条件：</p>
 <ol>
 <li>互斥条件：该资源任意一个时刻只由一个线程占用。</li>
@@ -225,7 +232,7 @@
 </blockquote>
 <p>在早期的 CPU 当中，是通过在总线上加<code>LOCK#</code>锁的形式来解决缓存不一致的问题。因为 CPU 和其他部件进行通信都是通过总线来进行的，如果对总线加LOCK#锁的话，也就是说阻塞了其他 CPU 对其他部件访问（如内存），从而使得只能有一个 CPU 能使用这个变量的内存。比如上面例子中 如果一个线程在执行 <code>i = i +1</code>，如果在执行这段代码的过程中，在总线上发出了<code>LCOK#</code>锁的信号，那么只有等待这段代码完全执行完毕之后，其他CPU才能从变量i所在的内存读取变量，然后进行相应的操作。这样就解决了缓存不一致的问题。但是上面的方式会有一个问题，<strong>由于在锁住总线期间，其他CPU无法访问内存，导致效率低下</strong>。</p>
 <p>所以就出现了缓存一致性协议。最出名的就是 Intel 的<code>MESI协议</code>，<code>MESI协议</code>保证了每个缓存中使用的共享变量的副本是一致的。它核心的思想是：<strong>当CPU写数据时，如果发现操作的变量是共享变量，即在其他CPU中也存在该变量的副本，会发出信号通知其他CPU将该变量的缓存行置为无效状态，因此当其他CPU需要读取这个变量时，发现自己缓存中缓存该变量的缓存行是无效的，那么它就会从内存重新读取</strong>。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/volatile_1.jpg" alt="" /></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/volatile_1.jpg" alt="" /></p>
 <h2 id="java内存模型"><a class="markdownIt-Anchor" href="#java内存模型"></a> Java内存模型</h2>
 <p>在Java虚拟机规范中试图定义一种Java内存模型（<code>Java Memory Model，JMM</code>）来屏蔽各个硬件平台和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。那么Java内存模型规定了程序中变量的访问规则，往大一点说是定义了程序执行的次序。<strong>注意，为了获得较好的执行性能，Java内存模型并没有限制执行引擎使用处理器的寄存器或者高速缓存来提升指令执行速度，也没有限制编译器对指令进行重排序。也就是说，在java内存模型中，也会存在缓存一致性问题和指令重排序的问题</strong>。</p>
 <p><strong>Java内存模型规定所有的变量都是存在主存当中（类似于前面说的物理内存），每个线程都有自己的工作内存（类似于前面的高速缓存）。线程对变量的所有操作都必须在工作内存中进行，而不能直接对主存进行操作。并且每个线程不能访问其他线程的工作内存</strong>。</p>
@@ -373,9 +380,9 @@
 <p>目前锁一共有4种状态，级别从低到高依次是：无锁、偏向锁、轻量级锁和重量级锁。锁状态只能升级不能降级。</p>
 <h3 id="偏向锁"><a class="markdownIt-Anchor" href="#偏向锁"></a> 偏向锁</h3>
 <p>大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得。偏向锁是为了在只有一个线程执行同步块时提高性能。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/biased_lock.svg" alt="biased_lock" /></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/biased_lock.svg" alt="biased_lock" /></p>
 <h3 id="轻量级锁"><a class="markdownIt-Anchor" href="#轻量级锁"></a> 轻量级锁</h3>
-<p><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/light_lock.svg" alt="img" /></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/light_lock.svg" alt="img" /></p>
 <p>这里解释下其中几个重要的步骤：</p>
 <ul>
 <li>复制 Mark Word 到锁记录：拷贝对象头中的 Mark Word 到锁记录中。</li>
@@ -384,7 +391,7 @@
 <h3 id="重量级锁"><a class="markdownIt-Anchor" href="#重量级锁"></a> 重量级锁</h3>
 <p>在重量级锁的状态下， JVM 基于进入和退出 <code>Monitor</code> 对象来实现方法同步和代码块同步，<code>Monitor</code> 的引用存储在对象头中。</p>
 <p><code>Monitor</code> 本身是依赖与操作系统的互斥锁（mutex lock）实现的。由于 JVM 线程是映射到操作系统的原生线程之上的，如果要阻塞或唤醒一条线程，都需要操作系统来帮忙完成，这就需要从用户态转换到核心态中，因此这种转换需要耗费很多的 CPU 时间。</p>
-<p><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/monitor_lock.svg" alt="img" /></p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/monitor_lock.svg" alt="img" /></p>
 <h2 id="锁粗化"><a class="markdownIt-Anchor" href="#锁粗化"></a> 锁粗化</h2>
 <p>同步块的作用范围应该尽可能小，仅在共享数据的实际作用域中才进行同步，这样做的目的是为了使需要同步的操作数量尽可能缩小，缩短阻塞时间，如果存在锁竞争，那么等待锁的线程也能尽快拿到锁。</p>
 <p>但是加锁解锁也需要消耗资源，如果存在一系列的连续加锁解锁操作，可能会导致不必要的性能损耗。 <strong>锁粗化就是 JVM 将多个连续的加锁、解锁操作连接在一起</strong>，扩展成一个范围更大的锁，避免频繁的加锁解锁操作。</p>
@@ -405,7 +412,7 @@
 <p><a target="_blank" rel="noopener" href="http://concurrent.redspider.group/RedSpider.html">深入浅出Java多线程</a></p>
 <p><a target="_blank" rel="noopener" href="https://hadyang.github.io/interview/">Java计算机知识汇总</a></p>
 <p><a target="_blank" rel="noopener" href="https://snailclimb.gitee.io/javaguide/#/">JavaGuide</a></p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.yeding.top">叶町</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.yeding.top/post/08fb3a6a9e16/">https://www.yeding.top/post/08fb3a6a9e16/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.yeding.top" target="_blank">Yeding's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6496f6160a154a674aaf48.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/f3d732a55ffc/"><img class="prev-cover" src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/5f6763fd160a154a6709d5e6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MYSQL数据库事务和索引学习</div></div></a></div><div class="next-post pull-right"><a href="/post/50b39b8439ac/"><img class="next-cover" src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/85572728_p0.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">绿皮书N2语法错题汇总</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/dde04d069e3b/" title="JVM入门笔记"><img class="cover" src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/89478039_p0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-18</div><div class="title">JVM入门笔记</div></div></a></div><div><a href="/post/5e47ee7383cc/" title="SpringBoot常用注解"><img class="cover" src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/86587640_p0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-31</div><div class="title">SpringBoot常用注解</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/image/loading.gif" data-lazy-src="https://s1.ax1x.com/2020/09/13/w0t8qe.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">叶町</div><div class="author-info__description">不要去了解我，也不要用因果报应咒骂我</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/3169866"><i class="iconfont icon-bilibili-line"></i><span>关注我的B站账号</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://testingcf.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/weixinCode.jpg" target="_blank" title="微信"><i class="fab fa-weixin"></i></a><a class="social-icon" href="tencent://message/?uin=502818113&amp;Site=yedingBlog&amp;Menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://github.com/Lost-Swords" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:kanaumachi@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="social-button"> <a style="display:block;margin:.2rem 0;background-color:var(--btn-bg);color:var(--btn-color);text-align:center;line-height:2.4;;transition:all .3s;position:relative;z-index:1;" class="button--animated" href="https://yeding708.lofter.com/" rel="external nofollow noreferrer" target="_blank"><i class="iconfont icon-lofter"></i><span>关注我的LOFTER</span></a> </div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text"> 1.基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text"> 并发和并行的区别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%B9%B6%E5%8F%91"><span class="toc-text"> 为什么使用多线程实现并发：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text"> 进程与线程的区别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E5%88%87%E6%8D%A2"><span class="toc-text"> Java线程状态切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%AD%BB%E9%94%81"><span class="toc-text"> 线程死锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2volatile"><span class="toc-text"> 2.Volatile</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 计算机内存模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="toc-text"> Java内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="toc-text"> 原子性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="toc-text"> 可见性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E6%80%A7"><span class="toc-text"> 有序性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90volatile%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text"> 深入剖析Volatile关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile-%E7%9A%84%E8%AF%AD%E4%B9%89"><span class="toc-text"> Volatile 的语义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile%E4%B8%8E%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="toc-text"> Volatile与原子性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile%E4%B8%8E%E6%9C%89%E5%BA%8F%E6%80%A7"><span class="toc-text"> Volatile与有序性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6"><span class="toc-text"> Volatile的原理和实现机制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3synchronized"><span class="toc-text"> 3.Synchronized</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-text"> 基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E7%9A%84%E5%8D%87%E7%BA%A7"><span class="toc-text"> 锁的升级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%8F%E5%90%91%E9%94%81"><span class="toc-text"> 偏向锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81"><span class="toc-text"> 轻量级锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81"><span class="toc-text"> 重量级锁</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E7%B2%97%E5%8C%96"><span class="toc-text"> 锁粗化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E6%B6%88%E9%99%A4"><span class="toc-text"> 锁消除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#synchronized-vs-reentrantlock"><span class="toc-text"> Synchronized vs ReentrantLock</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/4939954_p0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="那些年听过的耳机与歌曲"/></a><div class="content"><a class="title" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲">那些年听过的耳机与歌曲</a><time datetime="2022-08-03T17:25:58.000Z" title="发表于 2022-08-04 01:25:58">2022-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/a647efeab291/" title="【gal评】-交响乐之雨"><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/synphonic_haku.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【gal评】-交响乐之雨"/></a><div class="content"><a class="title" href="/post/a647efeab291/" title="【gal评】-交响乐之雨">【gal评】-交响乐之雨</a><time datetime="2021-10-29T01:10:58.000Z" title="发表于 2021-10-29 09:10:58">2021-10-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/858ff2ba3ad9/" title="当我们在玩游戏时，我们在玩什么"><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/genshin.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="当我们在玩游戏时，我们在玩什么"/></a><div class="content"><a class="title" href="/post/858ff2ba3ad9/" title="当我们在玩游戏时，我们在玩什么">当我们在玩游戏时，我们在玩什么</a><time datetime="2021-05-19T15:37:10.000Z" title="发表于 2021-05-19 23:37:10">2021-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/114244095f3c/" title="你好，Hexo"><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/nier.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="你好，Hexo"/></a><div class="content"><a class="title" href="/post/114244095f3c/" title="你好，Hexo">你好，Hexo</a><time datetime="2021-04-16T09:21:58.000Z" title="发表于 2021-04-16 17:21:58">2021-04-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/709e1cd6d598/" title="日本语之森-N1语法（一）"><img src= "/image/loading.gif" data-lazy-src="https://gcore.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/dog_food.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="日本语之森-N1语法（一）"/></a><div class="content"><a class="title" href="/post/709e1cd6d598/" title="日本语之森-N1语法（一）">日本语之森-N1语法（一）</a><time datetime="2021-04-16T04:29:17.000Z" title="发表于 2021-04-16 12:29:17">2021-04-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By 叶町</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><span>CDN BY <a target="_blank" rel="noopener" href="https://www.jsdelivr.com/">jsdelivr</a></span><br><div  style="display:flex;justify-content:center;align-items:center"><span>本网站由 </span><a href=https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral><img height="30" src= "/image/loading.gif" data-lazy-src="https://testingcf.jsdelivr.net/gh/Lost-Swords/ImageLibrary/img/upyun_logo.png" alt="又拍云"></a><span>提供CDN加速</span></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.yeding.top">叶町</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.yeding.top/post/08fb3a6a9e16/">https://www.yeding.top/post/08fb3a6a9e16/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.yeding.top" target="_blank">Yeding's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="https://image.yeding.top/img/5f6496f6160a154a674aaf48.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/f3d732a55ffc/" title="MYSQL数据库事务和索引学习"><img class="cover" src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/5f6763fd160a154a6709d5e6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MYSQL数据库事务和索引学习</div></div></a></div><div class="next-post pull-right"><a href="/post/50b39b8439ac/" title="绿皮书N2语法错题汇总"><img class="cover" src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/85572728_p0.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">绿皮书N2语法错题汇总</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/dde04d069e3b/" title="JVM入门笔记"><img class="cover" src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/89478039_p0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-18</div><div class="title">JVM入门笔记</div></div></a></div><div><a href="/post/5e47ee7383cc/" title="SpringBoot常用注解"><img class="cover" src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/86587640_p0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-31</div><div class="title">SpringBoot常用注解</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Waline</span><span class="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/image/loading.gif" data-lazy-src="https://s1.ax1x.com/2020/09/13/w0t8qe.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">叶町</div><div class="author-info__description">不要去了解我，也不要用因果报应咒骂我</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/3169866"><i class="iconfont icon-bilibili-line"></i><span>关注我的B站账号</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://image.yeding.top/img/weixinCode.jpg" target="_blank" title="微信"><i class="fab fa-weixin"></i></a><a class="social-icon" href="tencent://message/?uin=502818113&amp;Site=yedingBlog&amp;Menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://github.com/Lost-Swords" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:kanaumachi@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="social-button"> <a style="display:block;margin:.2rem 0;background-color:var(--btn-bg);color:var(--btn-color);text-align:center;line-height:2.4;;transition:all .3s;position:relative;z-index:1;" class="button--animated" href="https://yeding708.lofter.com/" rel="external nofollow noreferrer" target="_blank"><i class="iconfont icon-lofter"></i><span>关注我的LOFTER</span></a> </div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text"> 1.基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text"> 并发和并行的区别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%B9%B6%E5%8F%91"><span class="toc-text"> 为什么使用多线程实现并发：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text"> 进程与线程的区别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E5%88%87%E6%8D%A2"><span class="toc-text"> Java线程状态切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%AD%BB%E9%94%81"><span class="toc-text"> 线程死锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2volatile"><span class="toc-text"> 2.Volatile</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 计算机内存模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="toc-text"> Java内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="toc-text"> 原子性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="toc-text"> 可见性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E6%80%A7"><span class="toc-text"> 有序性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90volatile%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text"> 深入剖析Volatile关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile-%E7%9A%84%E8%AF%AD%E4%B9%89"><span class="toc-text"> Volatile 的语义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile%E4%B8%8E%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="toc-text"> Volatile与原子性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile%E4%B8%8E%E6%9C%89%E5%BA%8F%E6%80%A7"><span class="toc-text"> Volatile与有序性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6"><span class="toc-text"> Volatile的原理和实现机制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3synchronized"><span class="toc-text"> 3.Synchronized</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-text"> 基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E7%9A%84%E5%8D%87%E7%BA%A7"><span class="toc-text"> 锁的升级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%8F%E5%90%91%E9%94%81"><span class="toc-text"> 偏向锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81"><span class="toc-text"> 轻量级锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81"><span class="toc-text"> 重量级锁</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E7%B2%97%E5%8C%96"><span class="toc-text"> 锁粗化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E6%B6%88%E9%99%A4"><span class="toc-text"> 锁消除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#synchronized-vs-reentrantlock"><span class="toc-text"> Synchronized vs ReentrantLock</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/4939954_p0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="那些年听过的耳机与歌曲"/></a><div class="content"><a class="title" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲">那些年听过的耳机与歌曲</a><time datetime="2022-08-03T17:25:58.000Z" title="发表于 2022-08-04 01:25:58">2022-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/a647efeab291/" title="【gal评】-交响乐之雨"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/synphonic_haku.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【gal评】-交响乐之雨"/></a><div class="content"><a class="title" href="/post/a647efeab291/" title="【gal评】-交响乐之雨">【gal评】-交响乐之雨</a><time datetime="2021-10-29T01:10:58.000Z" title="发表于 2021-10-29 09:10:58">2021-10-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/858ff2ba3ad9/" title="当我们在玩游戏时，我们在玩什么"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/genshin.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="当我们在玩游戏时，我们在玩什么"/></a><div class="content"><a class="title" href="/post/858ff2ba3ad9/" title="当我们在玩游戏时，我们在玩什么">当我们在玩游戏时，我们在玩什么</a><time datetime="2021-05-19T15:37:10.000Z" title="发表于 2021-05-19 23:37:10">2021-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/114244095f3c/" title="你好，Hexo"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/nier.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="你好，Hexo"/></a><div class="content"><a class="title" href="/post/114244095f3c/" title="你好，Hexo">你好，Hexo</a><time datetime="2021-04-16T09:21:58.000Z" title="发表于 2021-04-16 17:21:58">2021-04-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/709e1cd6d598/" title="日本语之森-N1语法（一）"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/dog_food.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="日本语之森-N1语法（一）"/></a><div class="content"><a class="title" href="/post/709e1cd6d598/" title="日本语之森-N1语法（一）">日本语之森-N1语法（一）</a><time datetime="2021-04-16T04:29:17.000Z" title="发表于 2021-04-16 12:29:17">2021-04-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2023 By 叶町</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><span>CDN BY <a target="_blank" rel="noopener" href="https://www.jsdelivr.com/">jsdelivr</a></span><br><div  style="display:flex;justify-content:center;align-items:center"><span>本网站由 </span><a href=https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral><img height="30" src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/upyun_logo.png" alt="又拍云"></a><span>提供CDN加速</span></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
@@ -423,55 +430,85 @@ function panguInit () {
   }
 }
 
-document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(()=>{
-  const init = () => {
-    twikoo.init(Object.assign({
-      el: '#twikoo-wrap',
-      envId: 'hello-cloudbase-4g4zs9fdc78abf63',
-      region: '',
-      onCommentLoaded: function () {
-        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
-      }
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.yeding.top/',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
     }, null))
   }
 
-  const getCount = () => {
-    const countELement = document.getElementById('twikoo-count')
-    if(!countELement) return
-    twikoo.getCommentsCount({
-      envId: 'hello-cloudbase-4g4zs9fdc78abf63',
-      region: '',
-      urls: [window.location.pathname],
-      includeReply: false
-    }).then(function (res) {
-      countELement.innerText = res[0].count
-    }).catch(function (err) {
-      console.error(err);
-    });
+  const walineCSSLoad = document.getElementById('waline-css')
+
+  if (typeof Waline === 'object') {
+    walineCSSLoad ? initWaline() : getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css','waline-css').then(initWaline)
+  }
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css','waline-css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !false) {
+  if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script><script>function getGiscusTheme (theme) {
+  return theme === 'dark' ? 'dark' : 'light'
+}
+
+function loadGiscus () {
+  const config = Object.assign({
+    src: 'https://giscus.app/client.js',
+    'data-repo': 'Lost-Swords/Lost-Swords.github.io',
+    'data-repo-id': 'MDEwOlJlcG9zaXRvcnkzNjUxNTM1Njc=',
+    'data-category-id': 'DIC_kwDOFcPNH84CTkRO',
+    'data-mapping': 'pathname',
+    'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+    'data-reactions-enabled': '1',
+    crossorigin: 'anonymous',
+    async: true
+  },null)
+
+  let ele = document.createElement('script')
+  for (let key in config) {
+    ele.setAttribute(key, config[key])
+  }
+  document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function changeGiscusTheme (theme) {
+  function sendMessage(message) {
+    const iframe = document.querySelector('iframe.giscus-frame')
+    if (!iframe) return
+    iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
   }
 
-  const runFn = () => {
-    init()
-    
-  }
-
-  const loadTwikoo = () => {
-    if (typeof twikoo === 'object') {
-      setTimeout(runFn,0)
-      return
-    } 
-    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
-  }
-
-  if ('Twikoo' === 'Twikoo' || !false) {
-    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
-    else loadTwikoo()
-  } else {
-    window.loadOtherComment = () => {
-      loadTwikoo()
+  sendMessage({
+    setConfig: {
+      theme: getGiscusTheme(theme)
     }
+  });
+}
+
+btf.addModeChange('giscus', changeGiscusTheme)
+
+if ('Waline' === 'Giscus' || !false) {
+  if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+  else loadGiscus()
+} else {
+  function loadOtherComment () {
+    loadGiscus()
   }
-})()</script></div><script>window.addEventListener('load', () => {
+}</script></div><script>window.addEventListener('load', () => {
   const changeContent = (content) => {
     if (content === '') return content
 
@@ -486,39 +523,6 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/j
     return content
   }
 
-  const getComment = () => {
-    const runTwikoo = () => {
-      twikoo.getRecentComments({
-        envId: 'hello-cloudbase-4g4zs9fdc78abf63',
-        region: '',
-        pageSize: 6,
-        includeReply: true
-      }).then(function (res) {
-        const twikooArray = res.map(e => {
-          return {
-            'content': changeContent(e.comment),
-            'avatar': e.avatar,
-            'nick': e.nick,
-            'url': e.url + '#' + e.id,
-            'date': new Date(e.created).toISOString()
-          }
-        })
-
-        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
-        generateHtml(twikooArray)
-      }).catch(function (err) {
-        const $dom = document.querySelector('#card-newest-comments .aside-list')
-        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
-      })
-    }
-
-    if (typeof twikoo === 'object') {
-      runTwikoo()
-    } else {
-      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
-    }
-  }
-
   const generateHtml = array => {
     let result = ''
 
@@ -530,7 +534,7 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/j
           const name = 'data-lazy-src'
           result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
         }
-        
+
         result += `<div class='content'>
         <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
         <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
@@ -546,9 +550,36 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/j
     window.pjax && window.pjax.refresh($dom)
   }
 
+  const getComment = () => {
+    const loadWaline = () => {
+      Waline.RecentComments({
+        serverURL: 'https://waline.yeding.top/',
+        count: 6
+      }).then(({comments}) => {
+        const walineArray = comments.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.objectId,
+            'date': e.insertedAt,
+          }
+        })
+        saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+        generateHtml(walineArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      }) 
+    }
+
+    if (typeof Waline === 'object') loadWaline()
+    else getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(loadWaline)
+  }
+
   const newestCommentInit = () => {
     if (document.querySelector('#card-newest-comments .aside-list')) {
-      const data = saveToLocal.get('twikoo-newest-comments')
+      const data = saveToLocal.get('waline-newest-comments')
       if (data) {
         generateHtml(JSON.parse(data))
       } else {
@@ -559,7 +590,7 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/j
 
   newestCommentInit()
   document.addEventListener('pjax:complete', newestCommentInit)
-})</script><script src="https://testingcf.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+})</script><script src="https://testingcf.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 
 var pjax = new Pjax({
   elements: 'a:not([target="_blank"])',
@@ -575,7 +606,6 @@ document.addEventListener('pjax:send', function () {
   window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
   window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
 
-  typeof preloader === 'object' && preloader.initLoading()
   document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
   
   if (window.aplayers) {
@@ -621,12 +651,10 @@ document.addEventListener('pjax:complete', function () {
 
   // prismjs
   typeof Prism === 'object' && Prism.highlightAll()
-
-  typeof preloader === 'object' && preloader.endLoading()
 })
 
 document.addEventListener('pjax:error', (e) => {
   if (e.request.status === 404) {
     pjax.loadUrl('/404.html')
   }
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

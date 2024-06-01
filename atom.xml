@@ -6,7 +6,7 @@
   <link href="https://www.yeding.top/atom.xml" rel="self"/>
   <link href="https://pubsubhubbub.appspot.com/" rel="hub"/>
   <link href="https://www.yeding.top/"/>
-  <updated>2024-05-19T12:20:58.810Z</updated>
+  <updated>2024-06-01T03:09:02.234Z</updated>
   <id>https://www.yeding.top/</id>
   
   <author>
@@ -22,6 +22,27 @@
  <webfeeds:accentColor>ffffff</webfeeds:accentColor>
  <webfeeds:related layout="card" target="browser"/>
 
+  
+  <entry>
+    <title>2024.6.1</title>
+    <link href="https://www.yeding.top/post/00f2b1a4b7a9/"/>
+    <id>https://www.yeding.top/post/00f2b1a4b7a9/</id>
+    <published>2024-06-01T06:28:37.000Z</published>
+    <updated>2024-06-01T03:09:02.234Z</updated>
+    
+    <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 密码不正确, 无关人员请不要访问哦。" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <script id="hbeData" type="hbeData" data-hmacdigest="dabb9e5552bd2773d2c5b1353a415869f1621d5ce826a3600e08046c40fdce30" data-keysalt="49e3cbc17d8ac94c66bb7b5b7a6176619618a10992a3c7b82438bd6575986950" data-ivsalt="98d86c579ef64a3a3ddadf0b843092fa191ef4035c147c7ff3a3534d4342fffc">    d8ad70760904a25e3079c2b2a255e8ea6ec2cb6c0b81fb5a8728b2e9c415007abf6477527265180e5480e13be5afa6a5b7daeffc6137006d2bf047ce586b8b4af47a597fbc9a1928e89bca43cd12e291b8d4c948602d89ae5e45ccc9bece758c670611d8bfd5130dc14eceefc8ab35abaaccd0a7417a76ddc5224f95546d11ae9f4184dd0f178e5c3f7970586a28d6b2e998ccd11ad195a84413fd89328880c6a3902e1d6a70d8aab3339538acebb78c5e1880fd3085db7b1d38f95d8e2db65fd2a1efa362ec333f8633ad4314be73391d9d80d8c41acd85c17d77a76accf1e3596d5f224bbed44c82009818a09798c8b87edb3c17282e62b66aebc2434008c5fb316cd6ca500fa9287c6839ae1a344ba128774f7d78a3b1534d983773fbdd883b81cc62a7a40da09501f6193978767a3a427e6560fe73a0e0abd7ac06ada427ab35264152f30548a14f3458d104d9badc2357dacc4ca1d5639ae3e55acbbe2b54a4eee0223ace31c26dac51e2fd512c2e95a9b070c724d66f5711bd2e194baafffeaec20145b28d8382e1fb3ecaff7d3b671a5b2a70425de848c47548e345412322b1da58cda722a8a70c016a040833fbc6b8a2e5415227dcf96c620cae910d72f449cc667d7bf1477f70a617c28a2e3c1752db56d79fce73760e50e3f46f01c72c014be012ea97e26cde044870f2e66d133eb8d0c6050d3d72f7a94bdd9ed0a8c0d585a7ae3a0e0adb2b8ab895fca94110bb185727ef125cb5b25ecf1e434c5096d9c0fc831fd59f3b50bc6edde9106e3facfe74de0aa1c0185aca6c78807dbc44d32a860cd563213389e4eb5eca7d58dc186ecf930ad3eb26a47f5e9cc7b39afb146768700f188cf5016394cee56cca820e7dcb5f93b8405c5c5fcbf57f2bb45c50c81c108edb8d81583d3e52b8f3e48a2e35b466a559f8088e23bc502cab5e11a783beb7efdff4026627bcc5a698d92c40d49a497b002fb509e4872d78b73c9939412997d18d757a379e4026949ce391b00f42937e323fe19cc26b0ea78c3d53167a15e29d5df010ce443a1169fd7e603d05380df9b1cb6977ebae9cb621d6007b6d555934d62c237c964ebf92ce205c8f4628e34598b7736ff25ee187662a9ee170e59cf68d41e84aca552a05758b84efaefc31d93fd80e4a41742b92376a4241c175090d88f03c534535a44a5b3740dd48231bc0d4c12cc24bf5f4322d5caf71e18d41df62021bf2ae6ee47ed2ec6dfbf5252a50359a14a30d1a2caa018d758cfaa5fd8bdd1f3cc21ccc755a6bfea336fdd195349c156bf2d36878b30babba8454469415611461cb984fdcad2ffd6ef0f9b0b73f4ebc12403f7cae870e34e1b65daef752dbe2df5d98c6c76327bd013b3e53dc918b8ca5f594d6bad068aea2bdad0044fe502464bb8f22cb1a9256d4ba5e508fd322a2430ee45309fbabeb83bb668a59be9862c4e77ba8cdde5b08c5453ee0f80e3570e54c7c84e2dddc3da273a6643ca96b65e55c967a9a32d6af708b12e2426f531c46b7f3b536def8d8879828988b6758729567a5f8051c937bbb177a16dfc33993641f7d6cc1f3ec167cab14747913769ec2b7b763ee49ff40916c0a9e44e21877ebe36c7a9e9782300bebe7da29497127eabdf40e00d0dcd4a55fd9200fffbd09c11eee983a2a9373d66d4c6844f71d4ad7ff1caac60d49fb4e1901e0ff2b3c416d6532b49b6595708d08d4c97f1981639d92819f499bd68977e807996907482dac994b8edf45e1f6e0cff525abc6f1b73c43cdad94cd13dd595e9c80aaf8997a047224a75ee4c48567b1aa84ec24ce1ceeb25410994499e6be766692aebc084836e3737c544736223dd38f10dc817d24a9db7f32f0fc000bf9e87252b45fddbab90104967ba22721b1f4f16f8ad57cfe8067dbddd38d497ad82d5231f7419375cfa62709ece580349a5102e6f2cd19bc80edfc35887dfd7a73c688efc27de57bfeb94788d1c7b0d4c8efcbdb04c8c73f42f7b6148f3484a46fcc35a5a72b68c4e9ada756cc2c5c5a849931eb72064870083b17ef063dac68d662a49f1ad5ea0b9cff87205ee593ff4f0cbf6a4787ce826b6ecaa2af031ba94f725daca70a335d53d8b46904d75f921ddfe1d73dde64bf4d78370efcaaccbf2fd3b3718dbf78898d8cde9d93b7f9cd68df1f36aecfd7eb5aa27c847739f8d43dafa34b6089896086af4ef07b2fbf6f3c2f44c2e3e2f87d2c1146c1f58ea2a1d1cc1d8a5ac2640b80f7a78910c2dd86e078610a8eac2087efe4f53fe0a6e50ed74ad69ea0ee9d6796a49ba1edb21e3b31801567ec27532b0cb75bac88909b1533449d8738517eb709ce9d80d835ace8b2aa4240c8d6b61f6474729e0cb3cf74d75ec4207d8908dc4105fe6d8c09d6d6f16be9859262b978ab2f73f67606bcffb7b854fedb92514cc4d4132e5250b773ede5474aa1f9fb8a7de0ed963b67c3d5335fb6ab8752f78b100f630787d6327df2a01552072c3dee17c75f991238ca4698a89c52bb17f39fba2e1e99627c20b2d510478257070be618ad7c71d7039ebc28f065d2e5358971ed122c2565b35fa9b9be3925c5c46ef2632163019108dbb48856338bec9b18c8a46027132f58924b3c09327d16b35806f518629d3e39c561bd9f6db5f309da8f53316cadffedc1a5e3086562d171576e7bb489654f50747f9744cf088d9fc296f34f8252a5844dfd9316783f762af03ce1ab18ab40de4a42e32a7919447b1e8752b43730cf8e6bdc968aa041cb4941521ccda36e24f32d0e113d7a8efdfb563d4f3b264b74c78f  </script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-xray">      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">请在这里输入密码。</span>      </label>      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>      </svg>      <button class="btn btn-lg btn-primary btn-block mt-3" id="checkButton"> 验证 </button>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="隐私文章" scheme="https://www.yeding.top/categories/%E9%9A%90%E7%A7%81%E6%96%87%E7%AB%A0/"/>
+    
+    
+    <category term="隐私" scheme="https://www.yeding.top/tags/%E9%9A%90%E7%A7%81/"/>
+    
+  </entry>
   
   <entry>
     <title>驳游戏界常识两则（上）</title>

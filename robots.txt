@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /home/
+Allow: /post/
+Allow: /about/
+
+
+Sitemap: https://www.yeding.top/sitemap.xml
+Sitemap: https://www.yeding.top/baidusitemap.xml

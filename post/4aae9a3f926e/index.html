@@ -1,20 +1,109 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>只是一切都无济于事 | 叶町的存在证明</title><meta name="author" content="叶町"><meta name="copyright" content="叶町"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ff4deb3f258ed293758b17747931a0886c4145dce73e230f2ab427031b9f76a39d9e0d3535ed5bdf11a5ab4fb0f9785e11b03d13b83a22c7acc7321b3fd3857d0ec8dce8d5cb90"><link rel="shortcut icon" href="https://image.yeding.top/img/favicon-32x32.png"><link rel="canonical" href="https://www.yeding.top/post/4aae9a3f926e/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="msvalidate.01" content="278990AE0B56A7C826F87D7039A44A00"/><meta name="baidu-site-verification" content="code-c3G2TgtwfW"/><meta name="google-site-verification" content="_ae3149Ou1MfIkiKfOmwwj3AqiMp6ahEt9MT8YTVmtY"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>只是一切都无济于事 | 叶町的存在证明</title><meta name="author" content="叶町"><meta name="copyright" content="叶町"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="       ..."><link rel="shortcut icon" href="https://image.yeding.top/img/favicon-32x32.png"><link rel="canonical" href="https://www.yeding.top/post/4aae9a3f926e/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="msvalidate.01" content="278990AE0B56A7C826F87D7039A44A00"/><meta name="baidu-site-verification" content="code-c3G2TgtwfW"/><meta name="google-site-verification" content="_ae3149Ou1MfIkiKfOmwwj3AqiMp6ahEt9MT8YTVmtY"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  localSearch: undefined,
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
   copy: {
     success: '复制成功',
-    error: '复制错误',
+    error: '复制失败',
     noSupport: '浏览器不支持'
   },
   relativeDate: {
     homepage: false,
     post: false
   },
-  runtime: '天',
+  runtime: '',
   dateSuffix: {
     just: '刚刚',
     min: '分钟前',
@@ -23,10 +112,10 @@
     month: '个月前'
   },
   copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
   infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
     buttonText: '加载更多'
   },
   isPhotoFigcaption: true,
@@ -43,107 +132,11 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2024-09-09 00:21:01'
-}</script><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
-          }
-          localStorage.setItem(key, JSON.stringify(item))
-        },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
-          }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
-          }
-          return item.value
-        }
-      }
-    
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
-        }
-
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
-
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
-        }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-        if (t === 'dark') activateDarkMode()
-        else if (t === 'light') activateLightMode()
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
-        }
-      }
-      detectApple()
-    })(window)</script><link rel="stylesheet" href="https://image.yeding.top/css/index.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_2829204_gazvsq5039v.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="叶町的存在证明" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/icon2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://lyrics-translator.yeding.top"><i class="fa-fw fas fa-music"></i><span> 歌词翻译</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://image.yeding.top/img/angle.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="叶町的存在证明"><span class="site-name">叶町的存在证明</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://lyrics-translator.yeding.top"><i class="fa-fw fas fa-music"></i><span> 歌词翻译</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">只是一切都无济于事</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-11T19:31:01.000Z" title="发表于 2024-06-12 03:31:01">2024-06-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-08T16:21:01.597Z" title="更新于 2024-09-09 00:21:01">2024-09-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9A%90%E7%A7%81%E6%96%87%E7%AB%A0/">隐私文章</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">11</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="只是一切都无济于事"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 密码不正确, 无关人员请不要访问哦。" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="a8c35a1de1fb813ab1ad0949be75374d3ed09ea8cbc9eb83c30ca7bc56a6965b" data-keysalt="008d73e012ccfbed0ef14793f3c043a312dd4c42d70c1c4c34bff5b11c3c3e75" data-ivsalt="703ad737c1922bd94f61d801242edc1038cf0ab321af6e4836ea4ca276df9763">
-    ff4deb3f258ed293758b17747931a0886c4145dce73e230f2ab427031b9f76a39d9e0d3535ed5bdf11a5ab4fb0f9785e11b03d13b83a22c7acc7321b3fd3857d0ec8dce8d5cb90b4e79440dd57e7c109b2132441cc615a55c34729e7673819e75f1e7c9be1e17a5697659b17b9349f20c86317274a07a94601c06a473802184a70a72144ab940e26c645e83405d05d3ca30cc550c59482d92f636e0883fea84b2a232632ff577da8eed7dd3e697aaa4347595376c5a459c35b4181b835459cbf55dbf13186f15726876660b8cf4dec8ec74c73e66f1e2caf9ec7fcfe9c42b1a7beac2c628dcce6f1db023915cecf15a331c394cf63ae5e976d770943d9e3b30fbd61d96c36dbe9821f6008bb708b94d5a44cc6ad96c001e9f6cd1886cae63ff51abbe5963633def29419956581244667bf04d931e10f03651fec21d5ab9a2702e0f071566afd8884553e3172a5a80cdd9b596a064988e2a2942958fc49b020015d735c971fbc6199d7fc479a311f741ce9db37bc9a2abd0d61879f1c2129f05d41e623b94c29067cfca4912c40676c65851bda80f384c7745675ca6124f79c7aadcb7a7c11e00a852d78ff8f0d70f93490b3e96ee62377c64396de00c2763c7f1704d4803910727aef4be52d5cd942a4d4677637dd5afaee5e61bdc7db69fd933a7a9df6adeec73d7a032b52d8c41b5495f82302c604f6f4c4795ca6fdfa290092b3f99ce35e289ac373c8bfd04a0cacbc7ef7788ce74e7244ccc07b3aa47b4cdec6998cc8faec2c52fab659574c459907f5c2b4a3bd66acf0f333739d686965b0c653d587cc99857c07cd532bf7e2f97d4946f528ac3d9e99f9028ed0810cf2b6bd9fa27c8ae6e9d9594613e472486242d67741db157c1cfd307f8842ec632f65f12c9afe5db20cfebf288ba1fbc0887a3bc51655fe0ebd0b09c7032348b06b920db6c1d4cca5663d7f4e09128529fec9ba2da68d52a602281deb58cdba01bd86c905a011810cfc9385a7f49d1067618556d8acc80d425e39c31382b579e2cc73e0376644f8d417f02829ad7015da79bb0980049c77d5b933bc74b129e7a62d6ae49118c2b8351da73d55b25d3a0ba1e0b597c8f2ed6a6f3c529a42a5a633a104628ad5aba3920406bbfaef29004be080996ab98015fb0e9c6a2c359eb797219d8cc8e6314230fe593fe2a5b9b0499bd5dc2350d4b838162fb96fccc20ed935143605b182b5e5c8dc5a6a08074efa009ab75178ff9795be44c86db58d0253a7f07da4fcdfe9e07d3e612efb695af4af01b0d0b0088f60da2cd3b864c0ca01f8c662f50043889017e45b7fbb03666a09dd42297305bc9fe0e2c6b065d018932ab262c46688b4fa1c777eb509ff80a3687382c1729141fb1324e7ba57e2a49f0f5969fd65b94e9da773139c431d07b2771ad02b5214090d6e19bd923f48df2d2fbba3637f6f19a5ee38316aa5cafc3f0329e9f05bbcd74491f82d7dc073fb58640154d9224faf2f772603ca8ee8ce69a15c458c2971a4c3254bdbc03497d3c451c825770f1a191f040a4fcb4ebafce3d0693cd1c6842ce828cf8e79ca35e6f400d81719d9ddca782d2f815a6430113919f70fe9b551ec64f9e25085f9b17a53e3ca788ba7dd7d54634e5255d0814b553a0a7ab83f56f7e23c747510d28ec222ed2456b84f5a56805b48cb51c83a968d44484ddd8705e3d08fc49af1ac93a7fb9ff85ffaaf7d562eab4ae808be781af356feed8b95220d11b672a191f1003ddb38982b33d6a11bc7b626d532e2f57f16583f2cfd389e83bb9c4a4f161d956776d65ee24af5387b00332d62f9d002c1433c8aa6b87d3fe9d3e97c61b6a01f9d63fd373369646de01f5b7721209279f4271451bcd95b0b236308a9b900e4578402e6bb80f2e785b58bb82491b1bd884f94130def219365fee4797ba463738d34b0a3a596a2278fde9fcdc0882597959c1a20be02bb89edfabc83ef921ea94c0f6a11732d8bf3555ddc8175a41c1372e83f0c6391e1adc2f46898f3bae2f24e0e0727e82f3d283a9fe639da84f98a629fb8898a942124e99ce51437663616e406b7b6c6f6b104fb127f9c390e7dba58e9a2aad611f9e82876a086e46333700d145225be8fb9f53faa776edebdc8d8aeb8f09e32264fd71e930b119c7556b64c5dbbb30645bcc5809133a6c4bd1d187675fcba9eeeec24f0b087314f1c69e7894fa982ffb299d5eeb494e7d2f4da27fda7f148800eb107aa916efc30d91515e10cf9b9deb3f4bc7d8c86ef80a387d0f863638108f361a9a45e51b4c50fe05ba6868330d1b20acacce86fb8f8dc98f2b0dd07cdcd3019a1d04e37544e934fa4d579000e881a66aa8f102461f8bbc780bfd5b3a21c35293bccd63eb7d2647a7126cb038f9cae908733775cbba937cb564812b0aa146d5661c27cd4eb8253cd9abeb0bbdb04a566397fd2ff79a465e0ad742f3730cb66141f076372619b3518f8c5ac9e6f54093f701ddedd3db03aaa1d42f8d6644f2ca9accf92ebfd920891d6dcdd6ff283ab00edee104f226b714712da29f18d27f579c949f84ecaf40469d4354fe7e8a8a3833ff2588e073eb237d5638e7c150e206034901d3033d56520931a66ca92ee62c4b8538daddbb5c85434b55915fdad2aae22ed06d67b17c9f1473e470e062900c2ab617134c0307e029f6c34376e2301b79cb76320ed46c740f35745484f574f473bb0ceb1aeafc3511c0ec031859f429137be7811433487c3d91699f62b1964af73b125cc331669be8347defc4b59af422c303a5fa311fbb53d5a8406f86014577cf64c63ca353167befa9ae8f0649a28f27ce1e4ada68f03ec7336e7414eed98b5d5bfb755d91f3aeafa90b0b09ee597ccc95f9452c4c7e3e8a8b1939bad7bc933ccc43f83865a29a589ce9737ea778be793969bd17f4a6a72f3061159408938183b562dbb5cf7445b144178656d5ef4a743a2c330618e9bac6c79b8ea1e2c808775fa2750b50982993349bf0e6cf4ee66bedf98f65006b1e92705cb67a32c257509a4125f9888edd25dc80b91aa57bde10ce9ec2450cf04d05131272b43f50647b7a8e0e7efeba18c252101487a68f535fbf43dada7745a8b84200991d41d4f44e9af184a74aca06013745fa3362022fbdbb820a5db87d04dbdd833e911d313debb336f7dcb29a8c92ed3caceb145027078dcbbd0ec5f4863e4f7d250b2353b0cacee52dae71913f537e5021f7ddd1fd4ed14671211ec5c1511ebbae6a8276d0cb056ab55f153c6d7ce406afd46ea38c819fb328640b738b9f15ec6e31b60c02470a4314592904b3386f30ca21541ea7f81f2029acc56e1bfcf4e724dec356583eb860c17d35d83bd69eb59c4d0529c7813672f98fad5d39dc93b76186dde5b109b9396d4d4c0d4c1c838225a9943ad91143738735e3f57f26f002278aca0a07708f2643b6d99197d0e97bf1ff8056fc799e7f4a9e7099c46b745ba3bc43e4b0c3f40c59a340b77e7d5db627a29e03a0cac866e9ac2c10d70711df4187d527cbd5250711a669cc87acce7f710d26e33e3a4c9b374da2a5876eae40c97e88d1be3d264d1c3d8847bb16569345d926524d20ef03f338500ffe8c8204f97b4756a75a8f98f095fff9c93bf2cd0c9349be8aa6cbe05284910e3788572709211bc67b19332d06d2f93ede7b83be0f456f60096e42cf83d01151cde777b0adca8231f1d1bbc0a44bcdefd7a0a1284d726ec4164aaf7073b1586f1cbe218894f039b572025dc89eed442f57bfb8bb8073fc5155a5809282f41c4f5c01feeef3d6fb266f2dae046a28660e515bdba96bd304d58afdc478eb5464d9e0e97fa8d0fc84d0a20874eef5ad99042314d1e9bb793b81904f5aaa7170bfbcc230b7ed76ffc9818ab2a9127b23c796e709abc54b76356c5f95ec860fa47ec86cea933dc6b650b4612232ff60a540cfce38a48ae1174a80107602c9c43b43323e44358b449c0b07a7161a0521e7d0332f7a9d3bef78f62465c31aa3cabf15056a0c0eefbe80b11d5850d037b25bde125c30a10f7dba171fea11bf278601a8d8bc8f13038495e92ea074fb02aa3188de50cad4374166c06b9d39750865ac44d08c59776529e5373d7836864eac10a7520a958eecf8deaf54add3e3d857cad9d766e150d54ca967394519caa452c11665cf3469f1ce99df74110ca93a6b169b61ac93b17b5e8b58465df5184ba53c4a324b284818b8c2e31352805a80ffea8d14c25c1f04f309cf085a504f362092f533a8e276fe93bdacad16000e02d74e53768db9cc0329296119935407fb91ba26dd2bf5c2ac300f7c8fdda34eca9ff48f4813bc75d8bdef8e2593dbbd34b0d84a9f3170876af8ba79713cb6e7893c67d61b9f2f1cde255a9727c849f7e7bed817bdba2520fcc88948fd733f5c3189c4a908d7b8b176b9aed04db28cbe98787d380d7df53b6b4bbb77c053ecf278cb87b964349e9281e59bd77efc7583b7493aaacc3f4f5bb3a808ca93f9dca6f7af7e94a952e9c427b37d5f84432ecf4802357c4e99756062c1eb3944313704b852ce4e93c28fb8e69dac43bc514ddb232197c562f8448a6075ec6b83bf05ae09abe5a1cb2832b700ac4926b89bccb8c4b59f30dc4ff5673ada0bd63e98e5afdcd3a05532338c6bdd8d702053fe74590b6b4cbe5a04b7b36596c993f2453c1e45b10534d47b58eb7f82ed5ba1d83184aee59c7f1ea0bde63b0fff12b4b748ac85ff493ed00d2d59a0fedf2d37957fca63bf86cd48049c778f0bd498745c9c7a67323af9b4a58bd0d541f4bf852d18b50a0b8108291648d4adf3074a136b6215dbec391a1d8a3201c0186737884e370bba2f7f82d9e79c7ff6fd690a0757e4395462b843d3e0eac072c84506b4a5ef31da4d8acfd2e0a56c8e97a1b1df879998a8cdc856aff552df0c429d814b4a4461b582acb52ed6f9c9c4b5e78558592d7147b0bf97b1272c48c8bcc63f309bae757d07b4c9b0fda9a61b6049ab26a7096b802dc16ad1d459f99e3b6a7a4152b1f0bdf9a951897e22ca615573d51b4fd46131e40ba6a731da1065b1b8b9592b8790c70e89184d57f50f856bddfa245ea77a99049a26161b757a4c0b8fee22d01c3074fa8027d7e1251c5359849b3d88a36c56f809063adaf211d904e90f82ec01c084da442411d874f1c8ce4d7d25e22070cfa3b6433f2a65f8a0f8608c7b23ab6e802a9f7451eea4167a3b2dc9149f4346d6ca8be48b4048b2ee323be4b5937eabebc548c3abd9eea3df74aff41416236f5674c6bf9da1f3878b40341920d3e3c41019f29694e00395d3a1bdfdaad16098174b865523eb753d41168b5aeafc365925a39bad02755349d1ae565431a2301c37379a2afca9a19d63c8e5b06765f0979f0630328250a2a76a5ecabce2e046aeae0a61d634fef1281bf975b7adda5f49a6353617cb9bc7446f64a57d47677c266bb1e1e90673c686501dc7507b4d5913d253d1941d50cb1e22647faefc23bfe50c9812c62c3240cf6abdfeeafe320c45ca795f45375d6ff623159072843a777da514aba8cf3834df0305599768a390804c5e60c8d73bc1a2c2f48f267f03b2360ea03b0dfac0c8285e22f5ea7b7a49fff3c3cebead92aa96287eb9b78dc97c9057f10dc704f1729509a5a15bd60bf145a9dfe6b301e044648146c71ea29288e51c81c867175b02b5b861f35c8e9bd1714d581c92bfab3f1fdd19127d7fd0052caa3dc472b274d7613efaae45ddff6297c14bfcea46b27b8cbd065ce02178283bab6308238fa1cca243c0d2a0f690e672821cec21f38c65de421a7b6c5b82d821698ff6de1cba02cd5d9d4f761d5aceebac8ff53bbb2125ffebfc2d1cd1311cb6554a5291cbb64e88b614ed3f086431d830afd003984dcde31cb065f53ef8909683e03dc776c7cd9206a8231245fa545954b3050a6c1e29038a7a10e63441747dede51fe02b42cc29d7441012f8fbbe5dfc6b8d0339b0a57f840f26aaa9f3e15b9180412def19c98a8a4c62ab412d699e861fa1b938ea66ede6428de1f71e9f44645db25c9192cfa3912828642d7946cbf020f401174cc3a0e2db1c57b37392ecc298382c0faf199fcc12de092e72770bc1fda50dd6d1993455d2bfe4dfa77a33bf798cca88b4104bec76c0fafc05b9795742e8014d4e08b9ca0474b5121ef385f22c8ef4924ddccd8ace250e94870fff780234eb5d3e41abf7002731f9f98b6626c9af2741890bf18806bc2925a5d8971e4d7072a658968a278bdd504bbd469addd79776780b6d8afca542317d0ff83adaf5bec611efa877744c9ae5ffff9e89ec8ed671f8bcbcf427d2ecc7ea93086131f844c98a94b672c06275d32bbcb8a77d13f6953f18d6e968a82f1f3edcc11c220e2205abcda19ae0928cd439282bc8a9c04c426d50e548356a875f1776345c5f831afc9d02cd480c17c915e24378c41854e2e9f3a57824a6210038ddde842b8f2e2b86d790fcdee334e94daf3e88b8154d1d0a6a545f1c53431bb015040e7af6c4284096ae5f1df0838c87b7a7798a6197f12e883eedace03c56bf80f8eeac46dbb38783c8295839f17e4e7a5770a6a8f91a7c5e9f9dc9c5a31a04ad71a38b90d17a6df201b3b83821d410a88db6ba2d80b743ffe23f2c17a4a769156bd8b79243f777beb42644b5561c2c03d7ad1c69fb83fd732d35ae6926d67a8645386ce4bf8967c54830b4588fd107e1ade6f9aeb0878b703fa67bb301b8e80caf86939cef4d8dad4722ead21f44f4f4339b7f9376f11106d0aba4d5bf5ac9d362e520c5b3db5ecb9a91850ff6f980134b31c5bde95b276dd524a84c903bfd1e262501f68996ef78c7dc40bd388eec6cd491f2efcdbfcfb2b08778db82191b0fa3ca9f18ec046690fd87bbdde9d02590bd6637215dbf8e8da8c108fafecd5ea9ce4115c9630833d053afebfbe5dda4417527b70a75c4d126bf04b75c365a7d635ae8ea6ddf9650470dbd0bf8b26bd8886de4c8574cc019e8ff76806bc2acd3ca32207bf9fa73ac5287826905c162117eaeeef41ee2dedccd5c0a4f1bbd061ff5b6af4fbd2eca6ad889590d5d9faa3d93473c2fa7d8d0671fb89d471eeca66df7937479513bb63977e01d1558d7f8c977966bb5600b3d34962c2a4884a602dc93ee0081857f06f246e4e563aa66fcbdd91b86e3a5b8cb205d560f4f53495cec9dbc09d8bfb0737e4b7ffbb416667d421279abc6ce5ad26ea55d2718b4b946eb236224ab4d30cadd0dd1bca3531d03c77b1ef90e0dd2170a7da5bf8bbc3f8d7d6da41543c661a42acc9e780f3b420131caad3a0371b39c50544caef10f8220df42652824b3058f8c5049156531beb2e8da48ddb04530d1b61ad39b366292f7d30fa7641dd2a20039c6acece2a83d94e36f9dceefc66b96e42ab634d64061d7e92acf7efec5a3f5cada25075914bd3c396015d2b6d2348b238bd7c7292c345bd04ed3e258cec7cd30c2ea1b2ff49e9e2714588acbb8ab14a4bcf3cd72ee8f727aac3e8d322048b87e0dcbf08f7533b4225dc69c22caac3db4d03b7586ccbb62ce0683f175ed90efd227f67e10a5e2137d0d21faef4a8cab155bb681835b737e54d17c7a300712a579913d6e2a95e53f5bbf92021e9e643c7d1cfa37e53f5b254274f5d500ac3a64de76a7683278343df35b5e5bd3b157087d2cd39d8cfd7cff0b4123cd07a7dde49bfa66371b03e3c7649dceaf789b2bc139ae67cae5901af52065fdbcc14736d317830f27ca7f886c307b19bb5d8085e0dc38f58158583a1005bcf2beb0f7eac31dd898291804cef9b9014c1075073cf9ba75238b83fb71aad09c5f9d45312b86872b383fcb8430c99d3c5c04447d5e933124a8b79a86aed0f08974a4126ce4c10571b926a1b8a5fa52c7494695f0f0d18539382420e966dbf72f49cfc69c897ddacde047a002218668ed5946dd2906b49a76da8785ae60f43de66da92490f28646a89bc46fba753c11af3692a30e3a2877a7d905e446324d9ee41364f65686b0f3bad8a1c9955c50c7bd00ac93098935e28e996525f16deebbcce4a5c4cfe2e11cd46fd4ed4eddc2b2e2b16d55d705e70d7deaa89e51a691eec7c7546f9d434f089963d04b6d7e5c0a4fcfc88a410d05e9e591d32e3b1552fa01a859cef44ce502e2ca6c74d2d7c909f6d82d9400aa4c0428f908a9df5d32b7c42f14a6a679550a229603ba98a9ad2660611c3632d087d4cd63fb2efc89c13c0755f8fa00ff67536e2e276b1d763927811b62d28f12a64187cd08121f676eb947b5d48c1a23240c820cb768e04616a83685c830e7359614a5c300de5ff20b9ad4a5efdd21fabfe1474d6c57a513eedfdc2eb8c6b61eb63fdaa34f5b3c365be8b43951353b96f7c0cb5d5a8c3a74c6e8ac9fe29cbef2fef4838565b0cbc0b699822d9653609d1659d09109548ffda3062ce94d8db56cc9e039f8c16ba3f9dd27eecc64ee83bdd307edff75c650fc13eba511c7275f8482c007237b045ca92704f4249f98f78419789fff79dc4844dc535c6b0b6981d8114ace52d800a8f89929f29d35c58fb0f4054efa996a7bc4cd53b03197a1a4b4a0278dc2694f1bb39106414ffc52416edb4e24cecb5ea4317f5888f146eab2d2a40db5c643c71775dcdb05431d34a0c3b717923ac34d3270d4384588e496ee99194ad39b4b6f392ebe8a2f58ebe6782b755d8e399db0d2b6353472bb5a8ff414c13ae718802c73cc8a6d1b9530622a1d5764af9a4afdebed9ba88288e04a20bc9973f4d2e6e8cfbb92c96f3e1a1d528f23380f55c1a9f5703cf27d4732b465d661b9742b03a6745aef25813f75e8eeebfdda800208714221ac0e6d4f4986fc9a1ce2451f64d56d441ee1f02a62aeec25d58b3f9f29737bf2620dd22396a6e88b09729081954d8be55b324279d261b79d0af5d2280eb758740e3c1be1a998ddc7886a04525a33788c14099902e3aff544f843676c1a0ef389e42e3a4d99b1b858855544bce364ec89e8593424dfb2d7f44a280c8fb0bbcd0af34874a497a4a408aa67e44a72f7bd3af057439483c475d3040ec93f53f7a84c821c19de754d1476675a48861680e750a8c4121624baa464aaf769ef1b48e0347fe2a1e1a7b8aa3e6dafa4dff891ace9ccab00f50f9f5c5592b3c93ca6589e1790716e9dec110c83520dc40da8715c64187a7f9721f07ad6928621a396e6e8a8708eb04d5f2e4a8877f1ff28f0c0001ff77191628c51c4f4853d6c38d42348f614a24be83948dad0f9305b5da7b7e27bcfa2ba8879190008ef4d6596f27fb7ec12f083bd123967022a51ca4c78e7fe7d145762cb612cec5290bce84655fb12cc6
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="https://image.yeding.top/css/index.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_2829204_gazvsq5039v.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="叶町的存在证明" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/icon2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://lyrics-translator.yeding.top"><i class="fa-fw fas fa-music"></i><span> 歌词翻译</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://image.yeding.top/img/angle.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">叶町的存在证明</span></a><a class="nav-page-title" href="/"><span class="site-name">只是一切都无济于事</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://lyrics-translator.yeding.top"><i class="fa-fw fas fa-music"></i><span> 歌词翻译</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">只是一切都无济于事</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-11T19:31:01.000Z" title="发表于 2024-06-12 03:31:01">2024-06-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-08T16:21:01.597Z" title="更新于 2024-09-09 00:21:01">2024-09-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9A%90%E7%A7%81%E6%96%87%E7%AB%A0/">隐私文章</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">11</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 密码不正确, 无关人员请不要访问哦。" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="005aeb0a9edd40d23fa93aa6091b3f2b72d86cb4480b0c2f983eb1b90e1e7eb1" data-keysalt="e062b2d294acc4ac78b826eb949f4fb1bff3ad45beb90747d4c2d8ac905e0f8e" data-ivsalt="ed7d2de67da43aae2537523ebfe8f7e823e582f65726acf3c1c9ba8290f2ffbd">
+    7aae3e7e4dc4e313088ba75fc77b6f3bab15938595d128891837712f019e9722a1232591ad6976ca5205d3e26d0052c739cd02dded95ded1a87ef159c216261f0a89132ebed5e6a072bb662f6070b917be10b7b35cb24adc1eba2e9b9dc54db84c8cd9aff85ebf33f68120d11bce88b908be57be1140ac5e4a6c5e4f6be6f0355431c3403e4cbc493a9d53ed239b6920af27441c7c1b0739e12e3025a38ec30af3a66babd22026f8be63c042b5a69e7d7f1c83d545ec78a858697e98c6866550859a1808cc67854a01a5c2679fc062a516453a25e38ce9e3b96607718f6ad3667459ce8a91b4358546741ca82fff08a3a830ab0a9d5015539f9acef5cf9b1310bb586c0f7f7e3fd24cfbf57bedf1879aa6a279ee8980e67708c14f2d20779881550353ca2590a1e6b86ff022c54cd5048dbc3019842d32260fd2d1cda07d1676a072981e160631ee75f3768a69fcfbe2743fce47918eb8be6ec92db917ebc9831180b265cb035d8d0f3d38fb3741f05b31c6085e9291d1a0156b53400393187bb1d5c0886e21ce63827440981aa27618933aa418c6efb62bbb1bade37a6074fcf0b19a7a65b727c4cdb16091923534a469f33769146b993dc60ea92107a1850ecbc8f827494b5be2574848ada165c07dde96f7b0a0c643e4616d037bbd92507cf732e131e0f4d6fbd6b4de4a28586b94a4ca7567cab251e0944a7fb3fee1a5e49cc8fd722a59d5f801ed06f1dad09736eaee039bb0e1318f8a411eeb316f12ccb1b5318435362fbd3d0c0e1180f40a3fcd34f9aa29403765e3c4e0c2459ca729e9f0f1f8f16b6b1e018fb261ef51520376eb15d89182cdaa4ef2013c39a3ee6856ac797c4b99106b4a24ae0bc73cbe9c594b1aae30e9dfca9198d3e9482d264d3136f1a21a31d1f354fd1a850d7d58786b0177bd720c4ee7f19b029d9158872ddb246f72493d378bba8a37a67baf2fb95d84a195166f2c280a279ddd7314f45604d2a7a9b82541fb9cc91013b8ababc1e6bc6c36491358a63463e26a0586e8ec375bd8e2cedeec735501c7de61a45b48fca717a8d54b34f34eac918f469e7e1fc850f3847a4e73374ab6d65aed0a46340cefe8c3fb694f4ecedad2fc938ab406ad26431959f19af2206446a1f21df687047f36af0cb39f7b4793f01b5075e7cc27309f18180bc61f3fbcbd6fc7a4bc76b4bbe625515a7e3abddccf4bd469535af3142da5bbd28cf72c47d808b59487b713983fac3b4b0550ac6be3e9364daf99a1e25e4a69c3b68dfda89411e1725be18b65c9c00c109d23546385123b585e21ea8139d8fe4537a171727291cce54e041173186030a1ebbc358086ac115400a459d4e27d26771fd970e34add985c17aeb0a0acbb6cb098f2ad2c4f7866e651fa2c6f7006824138e85c275e083790a68e2a5fdf0111f777a9ee22ee98df4ac036bcf5762f396a38387a2dcb7aba0023636ffb92d9f5278eca4170ea4b72f0a1ccd30ef0a891c0bcebc29641cb5e4b595d5bf1ad1d6314c9291faefbba79bdf4ea67ef7901db9ee94791a89e84555631e554c2a9f2fd7321d50597547dcec5ff9408bbbd1c76c00fb62d36bc57a77327d6f4d4639f1f5e6bd92497feaec135611bfda162278207d3401cf2f9bd9b7edd461d51c75d4312de9b710fc5b9c7c8d4b926d70a48c7b1bfe79bb1fb253338bbd0a767007f521b87174e2c7d0357ddbd5dff3ec2c0df9540bcf99a1366da82a106f49deb410c9058d8c6af6398d72c4595b4ed5d666667d82a0759c06732790670e643201789a1a6931b9c4bd5bbbe199a4eb2ffdb3bcd72bb00febba5c9650f9697b973c983ff23e52ecdf1bf8fb903cfcf9eb70a08d99c675cd66d6f841489b3c4baed8f458ae5316500037cbaacd2cf24f38f7fe68764f66253fa1d38d2957f52f8328528e28b53bbb19997a3c261370e2a618e7181ee35d16c55b8f4abb1f14864c61f0f4eeb936ce2aac6671ab95ac1b2f0608e7ccbc227b55cd92f85fa04474a5ea63a95199d3d28cd9e9343ea7a57af2601c9970ef61f7b669d280f042c81f260fcfb812b4b941755372e3679cf14da8199e196cfd58e0b0542b30b7f3bed00f9098e8cafb3d10b850aceea86029fcce69bf3c1e46c7671f227f21b4f9bdbecd6155bafd6f8595a2e8cbcf0e3f9f35978b7b5b5aea4dc987207dfa8a9d283021630602d928bb0da68560de99ad0701b2d4bee9b0d796a1f370111fd821dbd1cd557ac710c5c193d79235cc75a3f562d5df785df9323689f889dc64bd583e6f119e9eb8f048427d1d570c05f10fd81af2e4c08183224588a778e702b026dd7fd1fd7be9fcbf25a4bfb101a6e13d5c3864546350864b9ee7805411293ea556847fc2090a177fde426da69038e0fecb1492f75f5b59748e39148c41e4c975b355e5dab8860eed2fc0f8dfe5a660f8752666ce69c58a93834cd5cc53e5f7bae14795770a8320a7976342460fbc0a23f595c0203dc92fb3d9d471cf515506918cb8807c1115ab9064ee43b756ad9e76a7a80f51d661dc83f03c0b3e2793307c83397c4a917c3ede26757ba6add855d1c5370ed9b60a006c11bedafa5e2407a547b6c9f7276616a02c3f6c1b796d46ca33a89e22f8ecd33371035a7b6dd157d182804fe43c2fe89bdfe6a7e52fafa49937ef6c6503f8e1913cb936436783bcbf4924161293f312fe4f43db65acc5cc258ac4d62eda98162ffd5aa4ed7df25af43172e891815cb6655a96843734d5a864eaa6862c39f34fe7daeb31d83b834772e7d6943aee946c3492036986d4673aa2e2caad2b79b48c060fa3dcc53b103d374a29e8d1318a53bd84d51c80b47639a344b9ee8913931e67d352bd27422a6f8b93c3703882fe201a247fa698c1630417cf9b1d27be4f0612e85e1fd5bc353f46bc2f8eb9a5ae0742c096bac3ed2f9e903b31fb105a231b599f906fd936ed69ce4134e0e363ce2b0a446b50a057f3d5ade7662b8d27aae52a2126d419978272ffd901a44d9d82016f6748c455cffbbff7fbac752db3bc1589c991c66222e0e4a3691f3673933959ae8106782a5b39e29faa30ced1720b4035fe09dc6965fa707bcfb2ece4aefbd450c24b4c3c9e05a7f2f8c97ac2bcada6ebb5fdba27eb497e7175d2aff49f7b7b9f2a85c64f713ceeae3b8a00be24bcfbb5e3f6f6c9dbce22b87b44793c4fa2efac1ccb3e3200856e9502953048dea9d7af8e7953d58bb1fa335ed1be6f3303671fe4b6cc5e8102922e902ef90980ea9fe390dcaec435893b343554bbff42e2be1600efcb1064d9c61c687011ee192ac2eba9aa8d1f17c08c685ea99f714bd4bc45c85e7369c18e2c5c8ce67421a5bd92e179c14e985e9c1753969eb0604e9f41aa1c45cbf05d14a438fbced23fc8e1dc51271c3bdd0edc4ef6d6b6eec604fd06c7a02966c34fd237c5f80864efb8c7ec0ed04bf1b65f6c18c82601aa791c208911aaa9e90220ec0379e2d5d1d636decff77f8c7d5bc724ea35dede1576254b9069bc3473023b36645384d087ded0a11b8da5a3cf185e31be1bae0bbf3e40ca0d938f7c3aa1d58c490e8778e6fd560501b55447760481f14a8de2a1077769c0860469900ab545f5cdfbb99a6f728ee6db96747a54abbdd9e58c2be533e9271c3d282a32632d9b14308d61a93d81242378a344237536b70a1651eac7879329a20dd5178cb7aa83090ed77f83660a51a05bc39d5a7e713bc97b4b82961de1306fc13d3e404377fd91d35e48f85d65a3ce18e6796f7ef05c12b59377754745abbea36dad60bd56d5e932172278854e7efcc26533e1494597b37f9ac0619eeb7ccd8e52b9775ea272f081d107d78d92e1bfd50ced267d6794722cda0d676699e9d38ec14366cf7e709e1eb747e8ea80b60e7c287d30e836dd5b5bb4760b900e78c3545963c1e7c1befb8cd3fcd5c5ca32d343faafce2f853ee4669bc9b679d4b3bfe4c20c072842386b5edf3b2686d16504d701c27dafa286e906e02b0d7d9bd62ae0bd7e84e0645f7d169adecf5eed98a37e446c5b41b8f0c790846a975d260a345ced2f18ff73d2565edd195257193b407dd2a93357236bbfa650d78d3983a5447aaeca6b80e14390ff65327c8831aaef5f35a3d461b57dfa4340e6ee6078235e1e6f392a0e7a0b0215244aeaec507fae42eb0e59f1d1a174a216a06f767e811eb7ad63bf0b6486fc93f83c88b5e3cfb98e6ef908cfe5f5641ec0f872af8db06e4a027db8411f0232f4f14b111b84f4941427fecbfc2530791fab4239dc2caa02a6fb72ada2d59be76feaaa19e754531d59d845338b1b6aff6b8bba2bdc440086186c3eb472b29d56a85f5b36fc3b7a89ca9905899aae5ddc1ecf78fabb24d6c64116174cee405767d76355a52643ab58535d4f7bf0364ce23bc6738afc47355a216d9fcd26894564c10b587b81c9c7e79c36d2453d3b7416152f7e3626b60fb93bf43e45e641ee0deb29f2c9e033f49276e5b017cb9ad09754de8d7bc3237ef31e6d96bd79b9b151d4f4e0f601dca8b8f53acd49a8b21a7845d67e354e1c8fd3af8277aed4e67fccae1464c9bbd9dd9abba68eb45e2fbd46838112e44c8f4a6cfdf2e111255c2143db3ff718fc949dbbc9631964d710511b4183c6e81808e93b706cb45c4b8b457f29c34d044c1902371011aae4095216c4bfaf16b05481414e336f726ace714a270d02643e22eae04b86d99b21267466313b8051723fab2728b1ac822b56e628422081fe60a5d00ee34b0b527aa43522d1ab45eef39fd0e239e8da891e0dccd39c34bfc8bdc46924c2aa1ee0b5b237e121ffc02e935a00fc431eba9dc2df616a5d89caa5471d80af4bb2e834b4c1428d179ec0d30821bc47a835323f44f22958c623f6990ad3c7443a6d56c6244b3fdd3b92f38ed2c0280e8564edec7e0375c3cd552d68b2c2bdfd3c4e0d0155ba32112fa19c8b7c2dd19a16eaeab74c18560f73ce932934e0a8becfa817266eb72088da73b7331c90600ab9af20cf74e40fd4662096da6905e8350003df8dfb7db3839482f47f2dc405ae77158eb33bceab5e0001a803eca41a4e53603415e9870b73068c15fbd5f740fc33f18e170669b5ccb34c50227fb016b9c2a96d5efd9fae3987c26b800623bdd6959837d84a2f85ebc78e5d6d7572e4c7c548890d9be2d3ab481c52c9c14617cc313d0d7d3edc6e2a62b697f930f13749817ae2169a5cb2a99d89e23aba37ccc2d7ae9d725098c366ad42faf0ca41f7de045adfad4f193ca905765acc27e0f19126707bc20b4cc0d713faa3c5f9bd03b7fb5f994c210728e4da1dcc4ade719d761c88ea001e8050ab008f5147a3553a84e68927a5aff667c650e3a96a4607169248ba4fe492293bd926299d3df25fc677fa854865dd0031ec91a2230209c07c73fca00e58a04883d2be4c5adaaf36afc6aacb64eafbced38a9401047d03cbcd9b370068398e0c1eec4f7238f0f54309ef4f87717e22d814cde2fa6ca46a443b67d2332e5da68ec8afebec75672404130d6709d0db42182e66524885ed422d97d533f231bf036d8522f05d0a83ad9f8810cb65b61de276d1807ff941bba1b1488db1a595802d79cb107961e1e376d306e8ce9c69ea506c9e2ff74e61e3b438788d6c3ad26f252d1c3fdc311aef1f4523f3348c66351ffee7867261b098c7b37b64b99ce490000d748b12fb43577bd2e43a6c45da2add1e8172a3d85a62e834cdea1d5d7cf641d0094387a0629fb0852d5fae67522e14cacee0c36528cab9b5013c62ec165a06db510cac7c1832d9dfc82129df3849cb242adf4fd7d1b2693948b36bd8f5f0316201b47a60062ae9545d8bdc8be5a4355230a9165c1736051b5851b54b0d23eb43307a63350171ee7eeeb2451eae919e86ac64749e9f0d734261e07ada943635db390c1fb01ee9c5eb09d3c3226db3c99c7248d1f3b76efbb70e73cb454648c140208139cf0496a7bb358ee90f0a056f592f42f19d4ab907a0b495a3ec5587317e3b36d878b3060e33f5be51a39fb325b48983abbefe18ba08942a1399507063f7214fe490bbbc71828d39aeaf28ce4ed2cc7a629d2448987dca70c40ea962f3ee61a7fb6da9ffbac850624e4836722d195d8a8ca53080f55f0379e573ea493bee9af2fd29ec67eab5ca6914d4a618d4d6bfa8e6be9dfb757d398110019a8a6be91cb8e5df48782d31d6af8288364cc8a345a3ba80fa101cef14dfcd9076cced990f9ee35b1a76a00a1dbc016e8ade36d78a2e2c6d688411940982c6fb466c9fe3cfe88ec5642bf2d6db1f08ad1c900baf558e5a794816ce2d1e60ac44a632e47a53d67c2199a1c64953f948ed86480aa901094d95342a2f761b5438fe2c624c6111aec89de12db2ca32ec8e2d2e814dabc9b4189bab2d287e10434c344d7ab06791515a1ce5526c4dad0f70d03bbc7542cb70f7de8c0eb0a7e32ebd9ac50a0d04a2078da2f72be7e5530c1c9c8e784d1ffd4afa20561c0083eb1cba83c464cf5b4d16932859f2b6b3549d2d416d5763f6df70d39ff13bd8f21ec8c9f953e567b92a60b254d63c0db93dfea73a09544deb81e10abd4be2644bc0c012f57ca3068330c2dc2394cf38cf2e643dcc7decb85b3a93fc375a2f3527bfb91b9d1be859db176fd4c9ec144fbe3155c087f7606590e1a376ef8128dacb6c7c3981755adfc47d392cf25a56c8926014a1fb1c740a234a07488ca26ff506e0e452f6c85edd6c90844158a54c881adba5239261324fea4550011f70e12eff57d937f8912e933234c3308f0ddac64f9ab975ea44d6e627ab9cd01b01483ceb6722efedbd58683f290c5d9fa2846cd59c4b7a398675221089f5e61d59ccacb1d7975548ccfd10686caae7692f70c0f16666927245dcd96695a699db77d1e8d9a6192665cc8f8e53752e80747462df76d68c7e54f60db2a8cf84fad8e261c68bcd9ec7a3c5c86b56e8b22c932efdfb54aecd0e883d7d78a2ead1a187e40a96970fd38cbb61c68088a35e6a080c3f015706dcecb2c0286b87287a01c2b3efb194f7bb1bd00983eef6c621ade876efe18a84d6bc559da6c4271ffd821ee7848bf487610c6ceaa803f6e471a2dfb153b405411d9b699883285d7fe9e4fd39ddccc35f749046f4ad866201fe6f87f286f0de4d590163aebbb3fc228edb365b5bf701b79e416f9ef23c7109b74ae42503400a534266cae25a57c59832bc0ef9aa2f1f4138908ea1e0330b8c55f64b7c2965b0853346377d29b38cd45e185601eb22dca7169ca12a6c7287f5280ce7a0570d7e59440d0958a475e9e47af34f000be9e2c76bba901667705089d82084ff00325193e0ab155a85bf8cbcbfe2e13094c681ed5a869c4bd73882b77e2c153e4e049e88a70d7fb0672c751abe96cacfc677915b5d006a0ee69f3d218c668228642ced83a4a1a35b1526b08098b5b884ea22a9bd6827cd3307a5c7563b0aee3ba57290a9fda8cdd0c47dd5cec53f63253bd8c61d28c044add90cd2a5917851cf84333df9424a7d411d75ea6562bd604009e41bd8ae7d719810294f962df566163c38483327549199708982c6204c82ba46deb69ac47dd68fb025acb41edad20283b09a1d68461d5a4064d18734653bd3050f4a6ebc036b84d2c0cd0c702e46b0d8045e64839ee24e13291c05724c25b1ef36baee068c3719530a7947f6049ff134b249efff8eb9e0dc3906e994f9783a3dc7d290a3917bdc648957550d2d7e1b2e543998b142d1232e9742c7531b118b79b27781dde490ff7765dd10b07890d7105d92ef826d76442bcbcb9bbea1c32c01e4ff2798ae4088d39107f17a96dc2551e97a2ae0c19a46ac5b5ab9a5ee59069aae36383b282b6b537d42f4cffc01d7ca6b798d79a9df6187e064b7c4ce2398e89b84b8cfcb46050cdc33c9b16990ae9a62e11087494dbc37cd36334e96e68d0dccf02fd7da9427d8255da51efb6a99f05282375abc4f7eca1edebe58936f577fe3c2048d2f76ce76add1bd5ddc36ecf1aa3d0a354c2ecb4aa78a89ca6dead656385141c8c70772b3a804f33027efb72c637e90c782b82149b8701d95d25bc75cd6847214adc0ddc7c563087066079a72011cd22e6f40f0584a7ebbf041914a246e674b0245b495b971864995b6e30ec17563f13672d4f2a5e5fe0fdf208ffb63edc24054481a296a970229937a43ef2e90801dfa51dd9d16e474158136ee812fbfe3b6dd53b922eeb0b30d298fc592d4aa7934fe963afc81786f5dd24bad187c4e61a5fa2bb7500d8c508725fc11a51fcba9a252a56fe782b137935e3d288b3db5742be4aae1eee16e61714c4b1eb647520747a4950f86118f747188d9aed270e211185b9887a1ffc4b46d8220eec6fcf6e4c14a34e14452d27efec7caea90205b61fd13dc73bc0976f02c532ca616a8d8d2e0e32b2afccaeed32792d6a7e112f8b0e3fff5d18bacfc4710a98ff20468d408cc014069ca0dcf6cab347f1067a1874729269fa3f3ae72cc9368babaec00e78290facf6f180070210145d2407c229c3168055a9a84b2397f7cbfd4ecdd34fa07899dfc3477d5e2592bc72d719c6f44b07d32aeed2adf98fbbb7d316c6f4b662a6b29383e4cbd6bdebfb5774e98e22b13d80e3fb2de9baa192d291ff62f85de4a0f994b9b91fc580afd6b4335aca52f05400d545bb612426368995d3d1a0a8228cab44589e700784d1839b88ba9eec6a417f240cb2ef96a6e8f2cc98e9d33db589a0649607910752e3af648a14ffbf88b182482f0e1d31fd2e003fd829450313ec93352a78c3db9cf74bfa1498d07a8f655344c41e959ee52db945adfb6a3f0402ab7ceacb4588849631c583ce143005aeb26612ce9260133da9f371b32859691418cecfb19e3ee10ba368cf27bbe559463d3bd42b80d875b6365a5abbb929f25724bc188225f4a9254913567be951c68546ba6e5751538f76dfb7cf282408e018e76f4b521adbed9ae02642d972dd8a2e496f187fdafd6f62b4f707280ee088deb9f8a47cb307b21785519372a499b915cf36d7a8062be7244aa543189dfedcbf3fe1a77ecf16eb007f7e541993111d06e68c924d0e7a833ff913f911bf4b36547bd52c859563c83569c584b6cedfb96675a294a803c0cc2750d8df3529f5ce5a05fb6718e07e2c0d519b1a7ec4c2255fa1b1976b36043434618944800739e6b91f60c1ab65738acf6e4d089fcd761816d98f1b298a5f3799a32abb4d0fe038842b8fd7e6df9e1be7daf784d43c4a51b4344d6b276e1be1271b6eaeee8beccf266b225444f5172b08f50e67cca0f31034a6953dea6fac53a0aa341b206570eafc71bf78fc437964eac6af9a1f71
   </script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-xray">
@@ -159,53 +152,74 @@
     </div>
   </div>
 </div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://www.yeding.top">叶町</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://www.yeding.top/post/4aae9a3f926e/">https://www.yeding.top/post/4aae9a3f926e/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.yeding.top" target="_blank">叶町的存在证明</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%90%E7%A7%81/">隐私</a></div><div class="post_share"><div class="social-share" data-image="https://image.yeding.top/img/angle.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/icon2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">叶町</div><div class="author-info__description">不要去了解我，也不要用因果报应咒骂我</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/3169866"><i class="iconfont icon-bilibili-line"></i><span>关注我的B站账号</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://image.yeding.top/img/weixinCode.jpg" target="_blank" title="微信"><i class="fab fa-weixin"></i></a><a class="social-icon" href="tencent://message/?uin=502818113&amp;Site=yedingBlog&amp;Menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://github.com/Lost-Swords" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:kanaumachi@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="social-button"> <a style="display:block;margin:.2rem 0;background-color:var(--btn-bg);color:var(--btn-color);text-align:center;line-height:2.4;;transition:all .3s;position:relative;z-index:1;" class="button--animated" href="https://yeding708.lofter.com/" rel="external nofollow noreferrer" target="_blank"><i class="iconfont icon-lofter"></i><span>关注我的LOFTER</span></a> </div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content toc-div-class" style="display:none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#33101"><span class="toc-text"> 3:31:01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2033"><span class="toc-text"> 20:33</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2024-06-15"><span class="toc-text"> 2024-06-15</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/3162f1f36d19/" title="驳游戏界常识两则（上）"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/library-of-ruina.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="驳游戏界常识两则（上）"/></a><div class="content"><a class="title" href="/post/3162f1f36d19/" title="驳游戏界常识两则（上）">驳游戏界常识两则（上）</a><time datetime="2024-05-19T12:54:15.000Z" title="发表于 2024-05-19 20:54:15">2024-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/eeb30522b71f/" title="从RSS开始构筑个人信息流"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/kafuka.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从RSS开始构筑个人信息流"/></a><div class="content"><a class="title" href="/post/eeb30522b71f/" title="从RSS开始构筑个人信息流">从RSS开始构筑个人信息流</a><time datetime="2023-09-09T04:47:08.000Z" title="发表于 2023-09-09 12:47:08">2023-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/c0412b6e4861/" title="人无法成为自己以外的存在"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/star-draw-wife.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="人无法成为自己以外的存在"/></a><div class="content"><a class="title" href="/post/c0412b6e4861/" title="人无法成为自己以外的存在">人无法成为自己以外的存在</a><time datetime="2023-08-07T05:24:21.000Z" title="发表于 2023-08-07 13:24:21">2023-08-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/4939954_p0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="那些年听过的耳机与歌曲"/></a><div class="content"><a class="title" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲">那些年听过的耳机与歌曲</a><time datetime="2022-08-03T17:25:58.000Z" title="发表于 2022-08-04 01:25:58">2022-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/a647efeab291/" title="【gal评】-交响乐之雨"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/synphonic_haku.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【gal评】-交响乐之雨"/></a><div class="content"><a class="title" href="/post/a647efeab291/" title="【gal评】-交响乐之雨">【gal评】-交响乐之雨</a><time datetime="2021-10-29T01:10:58.000Z" title="发表于 2021-10-29 09:10:58">2021-10-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2024 By 叶町</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.autoSpacingPage()
-  else {
-    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
-      .then(() => {
-        pangu.autoSpacingPage()
-      })
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://www.yeding.top">叶町</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://www.yeding.top/post/4aae9a3f926e/">https://www.yeding.top/post/4aae9a3f926e/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://www.yeding.top" target="_blank">叶町的存在证明</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%90%E7%A7%81/">隐私</a></div><div class="post-share"><div class="social-share" data-image="https://image.yeding.top/img/angle.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/icon2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">叶町</div><div class="author-info-description">不要去了解我，也不要用因果报应咒骂我</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/3169866"><i class="iconfont icon-bilibili-line"></i><span>关注我的B站账号</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://image.yeding.top/img/weixinCode.jpg" target="_blank" title="微信"><i class="fab fa-weixin"></i></a><a class="social-icon" href="tencent://message/?uin=502818113&amp;Site=yedingBlog&amp;Menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://github.com/Lost-Swords" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:kanaumachi@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="social-button"> <a style="display:block;margin:.2rem 0;background-color:var(--btn-bg);color:var(--btn-color);text-align:center;line-height:2.4;;transition:all .3s;position:relative;z-index:1;" class="button--animated" href="https://yeding708.lofter.com/" rel="external nofollow noreferrer" target="_blank"><i class="iconfont icon-lofter"></i><span>关注我的LOFTER</span></a> </div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content toc-div-class" style="display:none"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#33101"><span class="toc-text"> 3:31:01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2033"><span class="toc-text"> 20:33</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2024-06-15"><span class="toc-text"> 2024-06-15</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/5f8507acb7c0/" title="境外用户速通云音乐"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/124107496_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="境外用户速通云音乐"/></a><div class="content"><a class="title" href="/post/5f8507acb7c0/" title="境外用户速通云音乐">境外用户速通云音乐</a><time datetime="2024-11-10T14:10:26.000Z" title="发表于 2024-11-10 22:10:26">2024-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/3162f1f36d19/" title="驳游戏界常识两则（上）"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/library-of-ruina.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="驳游戏界常识两则（上）"/></a><div class="content"><a class="title" href="/post/3162f1f36d19/" title="驳游戏界常识两则（上）">驳游戏界常识两则（上）</a><time datetime="2024-05-19T12:54:15.000Z" title="发表于 2024-05-19 20:54:15">2024-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/eeb30522b71f/" title="从RSS开始构筑个人信息流"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/kafuka.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从RSS开始构筑个人信息流"/></a><div class="content"><a class="title" href="/post/eeb30522b71f/" title="从RSS开始构筑个人信息流">从RSS开始构筑个人信息流</a><time datetime="2023-09-09T04:47:08.000Z" title="发表于 2023-09-09 12:47:08">2023-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/c0412b6e4861/" title="人无法成为自己以外的存在"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/star-draw-wife.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="人无法成为自己以外的存在"/></a><div class="content"><a class="title" href="/post/c0412b6e4861/" title="人无法成为自己以外的存在">人无法成为自己以外的存在</a><time datetime="2023-08-07T05:24:21.000Z" title="发表于 2023-08-07 13:24:21">2023-08-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/4939954_p0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="那些年听过的耳机与歌曲"/></a><div class="content"><a class="title" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲">那些年听过的耳机与歌曲</a><time datetime="2022-08-03T17:25:58.000Z" title="发表于 2022-08-04 01:25:58">2022-08-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2024 By 叶町</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>(() => {
+  const panguFn = () => {
+    if (typeof pangu === 'object') pangu.autoSpacingPage()
+    else {
+      btf.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+        .then(() => {
+          pangu.autoSpacingPage()
+        })
+    }
   }
-}
 
-function panguInit () {
-  if (false){
-    GLOBAL_CONFIG_SITE.isPost && panguFn()
-  } else {
-    panguFn()
+  const panguInit = () => {
+    if (false){
+      GLOBAL_CONFIG_SITE.isPost && panguFn()
+    } else {
+      panguFn()
+    }
   }
-}
 
-document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  btf.addGlobalFn('pjaxComplete', panguInit, 'pangu')
+  document.addEventListener('DOMContentLoaded', panguInit)
+})()</script><div class="js-pjax"><script>(() => {
   let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
 
-  const initWaline = (Fn) => {
-    const waline = Fn(Object.assign({
-      el: '#waline-wrap',
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
       serverURL: 'https://waline.yeding.top',
       pageview: false,
       dark: 'html[data-theme="dark"]',
-      path: window.location.pathname,
       comment: false,
-    }, null))
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
 
-    const destroyWaline = () => {
-      waline.destroy()
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
     }
-
-    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
   }
 
-  const loadWaline = async () => {
-    if (initFn) initWaline(initFn)
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
     else {
-      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.1.2/dist/waline.min.css')
-      const { init } = await import('https://cdn.jsdelivr.net/npm/@waline/client@3.1.2/dist/waline.min.js')
-      initFn = init || Waline.init
-      initWaline(initFn)
-      window.walineFn = initFn
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
     }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
   }
 
   if ('Waline' === 'Waline' || !false) {
@@ -214,117 +228,125 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-
   } else {
     window.loadOtherComment = loadWaline
   }
-})()</script><script>(()=>{
-  const getGiscusTheme = theme => {
-    return theme === 'dark' ? 'dark' : 'light'
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
   }
 
-  const loadGiscus = () => {
-    const config = Object.assign({
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
       src: 'https://giscus.app/client.js',
       'data-repo': 'Lost-Swords/Lost-Swords.github.io',
       'data-repo-id': 'MDEwOlJlcG9zaXRvcnkzNjUxNTM1Njc=',
       'data-category-id': 'DIC_kwDOFcPNH84CTkRO',
-      'data-mapping': 'pathname',
       'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
       'data-reactions-enabled': '1',
       crossorigin: 'anonymous',
-      async: true
-    },null)
-
-    const ele = document.createElement('script')
-    for (let key in config) {
-      ele.setAttribute(key, config[key])
+      async: true,
+      ...option,
+      ...mappingConfig
     }
-    document.getElementById('giscus-wrap').appendChild(ele)
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
   }
 
   const changeGiscusTheme = theme => {
-    const sendMessage = message => {
-      const iframe = document.querySelector('iframe.giscus-frame')
-      if (!iframe) return
-      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
-    }
-
-    sendMessage({
-      setConfig: {
-        theme: getGiscusTheme(theme)
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
       }
-    });
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
   }
 
   btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Waline' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
 
   if ('Waline' === 'Giscus' || !false) {
     if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
     else loadGiscus()
   } else {
-    window.loadOtherComment= loadGiscus
+    window.loadOtherComment = loadGiscus
   }
-})()</script></div><script src="https://testingcf.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+})()</script></div><script src="https://testingcf.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 
-var pjax = new Pjax({
-  elements: 'a:not([target="_blank"]):not([href="/secret/"])',
-  selectors: pjaxSelectors,
-  cacheBust: false,
-  analytics: false,
-  scrollRestoration: false
-})
-
-document.addEventListener('pjax:send', function () {
-
-  // removeEventListener
-  btf.removeGlobalFnEvent('pjax')
-  btf.removeGlobalFnEvent('themeChange')
-
-  document.getElementById('rightside').classList.remove('rightside-show')
-  
-  if (window.aplayers) {
-    for (let i = 0; i < window.aplayers.length; i++) {
-      if (!window.aplayers[i].options.fixed) {
-        window.aplayers[i].destroy()
-      }
-    }
-  }
-
-  typeof typed === 'object' && typed.destroy()
-
-  //reset readmode
-  const $bodyClassList = document.body.classList
-  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
-
-  typeof disqusjs === 'object' && disqusjs.destroy()
-})
-
-document.addEventListener('pjax:complete', function () {
-  window.refreshFn()
-
-  document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([href="/secret/"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
   })
 
-  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
-
-  typeof panguInit === 'function' && panguInit()
-
-  // google analytics
-  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
-
-  // baidu analytics
-  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
-
-  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
-
-  // prismjs
-  typeof Prism === 'object' && Prism.highlightAll()
-})
-
-document.addEventListener('pjax:error', e => {
-  if (e.request.status === 404) {
-    pjax.loadUrl('/404.html')
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
   }
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

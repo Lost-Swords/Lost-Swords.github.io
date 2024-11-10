@@ -1,20 +1,109 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2024.6.1 | 叶町的存在证明</title><meta name="author" content="叶町"><meta name="copyright" content="叶町"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ff4deb3f258ed293758b17747931a0888d68e2ad4360ba0091435c2b0d2d24391807057986a289d545ba7c46ce088ccd6b7c2eb760ae856065283b6aed57fcaa409daf9b9e95d7"><link rel="shortcut icon" href="https://image.yeding.top/img/favicon-32x32.png"><link rel="canonical" href="https://www.yeding.top/post/00f2b1a4b7a9/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="msvalidate.01" content="278990AE0B56A7C826F87D7039A44A00"/><meta name="baidu-site-verification" content="code-c3G2TgtwfW"/><meta name="google-site-verification" content="_ae3149Ou1MfIkiKfOmwwj3AqiMp6ahEt9MT8YTVmtY"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2024.6.1 | 叶町的存在证明</title><meta name="author" content="叶町"><meta name="copyright" content="叶町"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="       ..."><link rel="shortcut icon" href="https://image.yeding.top/img/favicon-32x32.png"><link rel="canonical" href="https://www.yeding.top/post/00f2b1a4b7a9/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="msvalidate.01" content="278990AE0B56A7C826F87D7039A44A00"/><meta name="baidu-site-verification" content="code-c3G2TgtwfW"/><meta name="google-site-verification" content="_ae3149Ou1MfIkiKfOmwwj3AqiMp6ahEt9MT8YTVmtY"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  localSearch: undefined,
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
   copy: {
     success: '复制成功',
-    error: '复制错误',
+    error: '复制失败',
     noSupport: '浏览器不支持'
   },
   relativeDate: {
     homepage: false,
     post: false
   },
-  runtime: '天',
+  runtime: '',
   dateSuffix: {
     just: '刚刚',
     min: '分钟前',
@@ -23,10 +112,10 @@
     month: '个月前'
   },
   copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
   infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
     buttonText: '加载更多'
   },
   isPhotoFigcaption: true,
@@ -43,107 +132,11 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2024-09-09 00:21:01'
-}</script><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
-          }
-          localStorage.setItem(key, JSON.stringify(item))
-        },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
-          }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
-          }
-          return item.value
-        }
-      }
-    
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
-        }
-
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
-
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
-        }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-        if (t === 'dark') activateDarkMode()
-        else if (t === 'light') activateLightMode()
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
-        }
-      }
-      detectApple()
-    })(window)</script><link rel="stylesheet" href="https://image.yeding.top/css/index.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_2829204_gazvsq5039v.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="叶町的存在证明" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/icon2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://lyrics-translator.yeding.top"><i class="fa-fw fas fa-music"></i><span> 歌词翻译</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://image.yeding.top/img/angle.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="叶町的存在证明"><span class="site-name">叶町的存在证明</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://lyrics-translator.yeding.top"><i class="fa-fw fas fa-music"></i><span> 歌词翻译</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">2024.6.1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-01T06:28:37.000Z" title="发表于 2024-06-01 14:28:37">2024-06-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-08T16:21:01.597Z" title="更新于 2024-09-09 00:21:01">2024-09-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9A%90%E7%A7%81%E6%96%87%E7%AB%A0/">隐私文章</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">11</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="2024.6.1"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 密码不正确, 无关人员请不要访问哦。" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="145308636a2889ee7d783c81791b6236e879c43d2432790c38d41b079b696bac" data-keysalt="008d73e012ccfbed0ef14793f3c043a312dd4c42d70c1c4c34bff5b11c3c3e75" data-ivsalt="703ad737c1922bd94f61d801242edc1038cf0ab321af6e4836ea4ca276df9763">
-    ff4deb3f258ed293758b17747931a0888d68e2ad4360ba0091435c2b0d2d24391807057986a289d545ba7c46ce088ccd6b7c2eb760ae856065283b6aed57fcaa409daf9b9e95d7476f9be36f15320672505a89113add47e29c50aa8d7ca0eaf5134e84bb6b6ba29a9b2eb2a3253e0f99427904b19f055faa3dbc03677bd947bbcf97fdb250ba18d8bf0023431b26164065a9c7e3495b43653592034436cdee59841e6887573992fb251a4744ad74fa74bbf17c077ba09cd64b77e6778adbe560d9ad7c3f70b29dcd416e95965e6b3da6d7e811a24334bd50f03b92eb5f5bf7e11dc29565a72f72c2d6aa65c43c008957d246975b04467780a76fd7ac99e28add86aed36f77f46f92d28f75e0344b31cdad007b9111662e1fe0467e14a1854e35f7b69ac0cfcc04ec8db8ed2fc7e0e3b5ab94a8e6de9e7cbf6db77230871bd634f5c5a7f660c69bbfda2f9a1893c8c1f63778f2c24b857c9b0bc13495cfc69cbbcd08f31f9e9349661839257eef2290bd7d382f4601d932ece73466906e9415f43d45033a04af3e7b49256aa62e2c270cc65876654971d23bb29193415f0578fb3417d7ff04441efd94a541cb2b10857d2e2742c48690ef8ad37698ffb2476f1f16a7fa3f432328731d6c5ca1933bdc387d27c88f972e13039995b9c4afc20acc096455653a893fd385293461b82a9d30b753d0f7231e21f054ad79c2aa7caabceab42a568f340488ea4f5b0b9113c69cfaa3298629cf78bbec67f0f4a82d6994291ee5c389c5f23c049b291915fc9c89249ff8a3ca8a33dcff583d27479771a230094eeebe0d96c6904b755be45feaf50d02d1a5779c057144d546dd7bb96b1b4c3071f2236254d73344505b99cba458bf95c1239164b8a5b4d93622082c8bf4e2ff8dd2f0ac7c0d394c440770134502c8ad30c1b6f697e33b05f927c5f87f2d0e3c71c3444a7a5e9e0f4759f36becb9cae92d6083314940d52ea9891c02e4fe00eefc0c451da8b44a65c22a049ce9054da92ed2370fd5de9c2d68f73eab96bc6bb7a741e88ca06fbe931c03caa5460baa638fdb23a764b8a277a78d607344174b49e58615883f4c60758cf1d419c905a65213f9bbd6a16e235fa5f73f175297f6bd585ea8009995d5bf2f227145a5add4c1470575b0156c33ef9858ba52255bee2365eb8250ef9b07c3f3d66e05d4cf31d7f8574e91f23e1eead76578da71a432de2c9475a3f1495c43daa3daf24e91400fe9eb938036ffeaf58f61057de2d63e955bfd26aaae70bc50adfe7edc6bf1ce3411b8bcc4083d59a0a6aebdce2b2d0eef02f2ce839e1c2c156df739ed91b5ba64d12f414adee8524133541fb4110f9c14503ac56f31e61a9e44b4ff3f248e827330925cf600bebbce86f592e078a077eea659aabd03169ed90975243f05c955e3889b6ee7e70469a7af5fa373c251410a637c4b93f565aa6ef79d93c53dbe1b1c151730350f88789d5a31df2e6ed2f96eb043c7f184599c8385b2b7318c687233895d62cd3d01721f98434a42b57f112f372758bd34b1d760a326a3bec477831a819bf981dbea2b0d1e330e86e10fde626051dabd22b086c3a3f319ce9118fe24fd1f13229901d5beb624a8b6c6ac8fd7d36f1a6ef09ac301d25ceca35e134b6443fe59dd0089ee50014624b0d87b17702b1c7b70040dc6522be40ecd74f10d2159d6dc26fe9c6478efa4ba3d23f8f2d4509e0cc041fb4a568c72d99e2d578c37e153d22fa1af39a54f424634116cb8bb0ef6ad0ba195134f6e75ab1ff9a32fa308e7cfe5ff06ca2d9c1e1deadb0c5ff8c0978a7f5f4ead6ce442549f404fab8c6d64df49ade33ea761c7487d15b0e62fd201b60d5a901fd02f8a9f744e45dcb97675d8350e756edbf083aefb89d54f3747ab851bfc3290cac7988fc459fde3c63e28f000432a979979018b86975a75d0ae45344ee5262e4e55bbeb4f4544a6a1f5ca374b5f4f3b14871f9903aef7e8bc10c2e10d156481df0df5356e517d9e7b27b9ea72d4cf0a64299fdec566001abdfe6ab5c302943fb7621d88eecceb58288fec6530154deb0fa420f0b0f4df8ad904564b968aa93e3baeaac147e23def3a84d6a644d763ff394a075e25838191d82a675982f99f8d370cbc748600b5ffec3eb655b3179a6aab16fe334f9fab7d7f151b92d5a5a04df62de1a18ea20afff2a2a5539a61ccde9c0eaf144f06b957cee037228eeae920e55b45f1e58ccd8a9338b6587830406ed27665a33cd442d5d85e7f9dd16802a03d841622088f61e1a06eb8e07d63f95bc67cdcead2815e5cf0d47ce365a56e4063c229941ddbaa733e6473f29f696c21468c1b509721744e59f309d2ace4b20b7674629b41801c77778d10fa5d3e9f6d4d29b128201ab3965c30f99228ff719c4d304fe3403825399d57b45de6ff7ec5a93cb747421102468bb54a87d6238f2cf12bc71089882c1a395b1f54efcde604ef35538ed5baf5d8fd37a455d3247c32dea5d7264fb08c50c159c40ff4d578f6e7cc9b87ff84598a9201202a50cf90729a205cf6438eb326fcdfbff77afe1b590c0564bea5d92453f7433bf44b18b05d431e0b378b08c5209ef9e1d0d6015961ca8eb54fb9a16656422f5bc14cb412ca2d3587fa249ccbbaedb57574b36230c28ef737e38545264e672cb077d360ef744411a70ab0d26060d843a28c2523dedf77507d80f9a4c52de0291df21c84b5ddc034d32dcaf823e5dbee5242968a002e618f0453d0d3a7048068042be7bae47f39e898ee3949afdb0e63146fb3f23f68640ec60037f12d59d43961a430f6256737a12385a1ff427ec44e881c9b46f757a6ae6fc4305a16
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="https://image.yeding.top/css/index.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_2829204_gazvsq5039v.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="叶町的存在证明" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/icon2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://lyrics-translator.yeding.top"><i class="fa-fw fas fa-music"></i><span> 歌词翻译</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://image.yeding.top/img/angle.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">叶町的存在证明</span></a><a class="nav-page-title" href="/"><span class="site-name">2024.6.1</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 工具</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://lyrics-translator.yeding.top"><i class="fa-fw fas fa-music"></i><span> 歌词翻译</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">2024.6.1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-01T06:28:37.000Z" title="发表于 2024-06-01 14:28:37">2024-06-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-08T16:21:01.597Z" title="更新于 2024-09-09 00:21:01">2024-09-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9A%90%E7%A7%81%E6%96%87%E7%AB%A0/">隐私文章</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">11</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 密码不正确, 无关人员请不要访问哦。" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="86f1d693b83053c507c2eb38632468060a091e1bc207c1dcf72d202539b881e9" data-keysalt="e062b2d294acc4ac78b826eb949f4fb1bff3ad45beb90747d4c2d8ac905e0f8e" data-ivsalt="ed7d2de67da43aae2537523ebfe8f7e823e582f65726acf3c1c9ba8290f2ffbd">
+    7aae3e7e4dc4e313088ba75fc77b6f3b56af7c9762fe4bca589aa0bab7557ab66839128f6e6bff2033da47c603b1fc9f05f47358b063955d0f85e6d3d02d5b54ef335960d31cf6e8f141279acd91b7fe61b7e1f4928f95df443249292300fe43357940461d9feeacb049b5d3432950a0d9bd8006459e152d10174334061aefba424c138b769fed47c49b3341f8df6d98623b3ef3e6081fd1bb061f2fde466aba0ff253d0e7f8af9382ed65f72ba17dff5305aa0218ae38ff5e7c14bceeccced44c3b141fab982358aa07ca175edff054b098290cbbfc22e3bfe514bb2362840c9c8cd5785363a4c73688580de508c0a35d67f2624555ec8b47062a418539ca5bc8571f2288214c75eede74603de58e58598d4217e1c7c7f39bc22fcf643999de4d5099562b16865e9f2fd5933136b436c5a9c9a6db14bde66900b9ec70372ffed45ec475777f3170d78d4460459fd4b5b3cc93eefebaa7ca2adfc898fbf40e6ad265d1ec36db0aedfae98bcdf72713f589e45b9f0b8c775a72cab4093320e3da5fdc3703e5985e395fba851bbdda46d9ff07ea8a9ec03600e769053e7121d9c5f20e9b482cebe0df124e0707ec9d05b1ca7b4049852d10678712217f2674e24e686defb4988875ba476688bb115cdd9b8b4df7f8613df4424227d54401ccf390e51f2d4541ff62f9af8f7ca90fec6d9c4936e6b5673c16053c0d11d95aa3ba1e73e124f92da95e7242399503957d6f4399ab790db539ef1ce1e182e2c37a5894589b9cac8f38a0a83e641d64e3879b26e3452d5a055a8cad2a728f570902b55fc1cb30ee24d97f2f054826af944736bc6d1d29394b989d2c3d46148bebffbdd86250333f6266a0bfa1a06a80f73fa3d05045883ffd71f290440966045306a9683d598d677dd28f0c4f33bcee2e6daaca9baf33506747827c6e2a4af26593c53cb0c5abfa6fc0cc428a8e356679a6b7e8b1b8e7eec0a1bab175883c58647d4337803d4395c12b0aae148fb2a082c4b4000f3d961d90df5bc8948661ad7e5d15a06521115afe774de2873a835666d9fc12cad03bb2069eca64008b15a4af1f07e93af3b16a2406a99eac798ab5368b419a7a4bb96552cbf4c6f5de7510d87b49842bbc1cb3c47e6a6eec02b6faa11785df69c6dad49270e48c4c22ee34ff8e8de0f9dc8f383504bb08eb1ec19fbd4ecee660a85db2111640beabf3c34788ec91649e5dc48d3656a381fa933c6f6d0e56f2895dc7fee3221d74fe9231041fa64305a69dbdbb54a7655dca2035cbb6eb3bf9849098dbafc1b5aafa9b2e3e91a93a504dae6a5f4fcfeaadf5cc037f3c6d4ec63d95e8ae694ef831cae7ca069621d85e1c13a901ac1b269c91a1f439de2fb148ac2c6578bc5c276f41d6fa797864ae64249619a627fb098581f20c18ae7b459c9ff570bc3e520e235baa445c54031a46b7e82f5a5e9739a0c59da062d7c8c6f3e024ac403e8ec0cbc64d78bf822ca71cfa9f00a651be3a90e97e681ee46e5ee8dddbb4704ff8132959b23a91cfa1a9e23cc8abd2bba3a5c1062c9acf8d1c905067930dfd5ae3e777990e2801c2aee05133a2c6d2207891aa908bd86c66a3859e30c532dc1e891a7b4abff6a915864647993b6d56e0d89d57356078050fe3dc70d93b9ed27e141f366b9541708491514df5e864b5ac38400c329c0af3a113e3f25e70098276e26c9b95e86e65f9b5521d9c1f62f9c969ba5ddc85acb2d3e28f4f03bf2414133d3fa7f5e632a0af9b0f892e2cf4a47331b76b9a8fe6e65552375f21306101786bc53d94953228137c5567a267267ed01d2f4f54162f21bef77604c4e1b75b44fc1ccebb4c2c0030c566189f686b28e742def6236a13e4d82c774146acbef4bc6f676235869e51495c4bc49bf412b8a985fa5001ad08e90f3379e380649709ad8e2afda1a60233e0f9489e229cf7f4bcdbb26a5880cd8e2f9cb8ecf64a6f82b4fe1a6e9610248bac552e17c0f705a680efcd101b4e4b9fb9644486868aa6df4392b1062713294fd95a98320a4ffa58cfcb74c4ee761abcb09204bde6180210b10b331f0d59947af718aefedc05c2f8453b694cacf25e10f57cc671bdafa28af7645df8b4ad6e3d1edf404ff866b2f702e8131ad9b90bbe103cc96767810990612d404ef9f3069dd62b768893810748fa63d7ee29cae0cad0f492791287c2486de241f2970a047b67bd150aee599202d3eb07410d3c811930a5e8baa4880bf3e0289be183e67d6fe301e33b0495fb9670ae163e3e458e34c59648db832959308af5d6486e6f390317ab11da53092b8222db98e34e53c22eb3aa7e0b1702a4c6b9da8cc85cd9cdc157da8c9ebc96abad5e020c0a9902194f773a1a8b018f68d63935645414bd5024389892270774cc30ead893b0d5fd0c6fe5124578c79e34918710d6c9b54bb54d25be3cae88e1c31edd98affa9a868b2fdba6f6affd94c3999983f0c77fb69d8723cb7eeef4e15a18e9792ba07b84c3928093d8a63d3bcc23f0cef4aa84224f5dcf207bbf7f40b7445448c3bfbf192201b2a679453fe5d780dd053c54da3d0cbc7fcbbd9e47a71a6fefdc9818c9299b551e1011a5e3dcf3790cc8a60b545e9063dbfc4fdbb7928eba47f4d2d41dc6d7bbf907c27d1b35a4509b34a6e89f9d1b9df144ffb91939b727086b732029ebb364a575e5b12e1f0ef18bff8f5eb755264a08122e679daea378e0b34b62eb1e67b642b639c97e0472c4e0b4520795e3734c3d7311aece78467fe96675f31f5629a1cc8668e74611382f9f3862ec40fabd40ffd9829c4bd678a1a5dbbdf32a8b7ee82273a95573837945509c4272f847559118546518
   </script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-xray">
@@ -159,53 +152,74 @@
     </div>
   </div>
 </div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://www.yeding.top">叶町</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://www.yeding.top/post/00f2b1a4b7a9/">https://www.yeding.top/post/00f2b1a4b7a9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.yeding.top" target="_blank">叶町的存在证明</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%90%E7%A7%81/">隐私</a></div><div class="post_share"><div class="social-share" data-image="https://image.yeding.top/img/angle.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/icon2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">叶町</div><div class="author-info__description">不要去了解我，也不要用因果报应咒骂我</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/3169866"><i class="iconfont icon-bilibili-line"></i><span>关注我的B站账号</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://image.yeding.top/img/weixinCode.jpg" target="_blank" title="微信"><i class="fab fa-weixin"></i></a><a class="social-icon" href="tencent://message/?uin=502818113&amp;Site=yedingBlog&amp;Menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://github.com/Lost-Swords" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:kanaumachi@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="social-button"> <a style="display:block;margin:.2rem 0;background-color:var(--btn-bg);color:var(--btn-color);text-align:center;line-height:2.4;;transition:all .3s;position:relative;z-index:1;" class="button--animated" href="https://yeding708.lofter.com/" rel="external nofollow noreferrer" target="_blank"><i class="iconfont icon-lofter"></i><span>关注我的LOFTER</span></a> </div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content toc-div-class" style="display:none"></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/3162f1f36d19/" title="驳游戏界常识两则（上）"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/library-of-ruina.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="驳游戏界常识两则（上）"/></a><div class="content"><a class="title" href="/post/3162f1f36d19/" title="驳游戏界常识两则（上）">驳游戏界常识两则（上）</a><time datetime="2024-05-19T12:54:15.000Z" title="发表于 2024-05-19 20:54:15">2024-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/eeb30522b71f/" title="从RSS开始构筑个人信息流"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/kafuka.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从RSS开始构筑个人信息流"/></a><div class="content"><a class="title" href="/post/eeb30522b71f/" title="从RSS开始构筑个人信息流">从RSS开始构筑个人信息流</a><time datetime="2023-09-09T04:47:08.000Z" title="发表于 2023-09-09 12:47:08">2023-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/c0412b6e4861/" title="人无法成为自己以外的存在"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/star-draw-wife.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="人无法成为自己以外的存在"/></a><div class="content"><a class="title" href="/post/c0412b6e4861/" title="人无法成为自己以外的存在">人无法成为自己以外的存在</a><time datetime="2023-08-07T05:24:21.000Z" title="发表于 2023-08-07 13:24:21">2023-08-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/4939954_p0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="那些年听过的耳机与歌曲"/></a><div class="content"><a class="title" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲">那些年听过的耳机与歌曲</a><time datetime="2022-08-03T17:25:58.000Z" title="发表于 2022-08-04 01:25:58">2022-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/a647efeab291/" title="【gal评】-交响乐之雨"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/synphonic_haku.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【gal评】-交响乐之雨"/></a><div class="content"><a class="title" href="/post/a647efeab291/" title="【gal评】-交响乐之雨">【gal评】-交响乐之雨</a><time datetime="2021-10-29T01:10:58.000Z" title="发表于 2021-10-29 09:10:58">2021-10-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2024 By 叶町</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.autoSpacingPage()
-  else {
-    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
-      .then(() => {
-        pangu.autoSpacingPage()
-      })
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://www.yeding.top">叶町</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://www.yeding.top/post/00f2b1a4b7a9/">https://www.yeding.top/post/00f2b1a4b7a9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://www.yeding.top" target="_blank">叶町的存在证明</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%90%E7%A7%81/">隐私</a></div><div class="post-share"><div class="social-share" data-image="https://image.yeding.top/img/angle.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/icon2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">叶町</div><div class="author-info-description">不要去了解我，也不要用因果报应咒骂我</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/3169866"><i class="iconfont icon-bilibili-line"></i><span>关注我的B站账号</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://image.yeding.top/img/weixinCode.jpg" target="_blank" title="微信"><i class="fab fa-weixin"></i></a><a class="social-icon" href="tencent://message/?uin=502818113&amp;Site=yedingBlog&amp;Menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://github.com/Lost-Swords" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:kanaumachi@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div class="social-button"> <a style="display:block;margin:.2rem 0;background-color:var(--btn-bg);color:var(--btn-color);text-align:center;line-height:2.4;;transition:all .3s;position:relative;z-index:1;" class="button--animated" href="https://yeding708.lofter.com/" rel="external nofollow noreferrer" target="_blank"><i class="iconfont icon-lofter"></i><span>关注我的LOFTER</span></a> </div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content toc-div-class" style="display:none"></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/5f8507acb7c0/" title="境外用户速通云音乐"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/124107496_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="境外用户速通云音乐"/></a><div class="content"><a class="title" href="/post/5f8507acb7c0/" title="境外用户速通云音乐">境外用户速通云音乐</a><time datetime="2024-11-10T14:10:26.000Z" title="发表于 2024-11-10 22:10:26">2024-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/3162f1f36d19/" title="驳游戏界常识两则（上）"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/library-of-ruina.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="驳游戏界常识两则（上）"/></a><div class="content"><a class="title" href="/post/3162f1f36d19/" title="驳游戏界常识两则（上）">驳游戏界常识两则（上）</a><time datetime="2024-05-19T12:54:15.000Z" title="发表于 2024-05-19 20:54:15">2024-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/eeb30522b71f/" title="从RSS开始构筑个人信息流"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/kafuka.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从RSS开始构筑个人信息流"/></a><div class="content"><a class="title" href="/post/eeb30522b71f/" title="从RSS开始构筑个人信息流">从RSS开始构筑个人信息流</a><time datetime="2023-09-09T04:47:08.000Z" title="发表于 2023-09-09 12:47:08">2023-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/c0412b6e4861/" title="人无法成为自己以外的存在"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/star-draw-wife.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="人无法成为自己以外的存在"/></a><div class="content"><a class="title" href="/post/c0412b6e4861/" title="人无法成为自己以外的存在">人无法成为自己以外的存在</a><time datetime="2023-08-07T05:24:21.000Z" title="发表于 2023-08-07 13:24:21">2023-08-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲"><img src= "/image/loading.gif" data-lazy-src="https://image.yeding.top/img/4939954_p0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="那些年听过的耳机与歌曲"/></a><div class="content"><a class="title" href="/post/53fc1dd0eb8a/" title="那些年听过的耳机与歌曲">那些年听过的耳机与歌曲</a><time datetime="2022-08-03T17:25:58.000Z" title="发表于 2022-08-04 01:25:58">2022-08-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2024 By 叶町</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>(() => {
+  const panguFn = () => {
+    if (typeof pangu === 'object') pangu.autoSpacingPage()
+    else {
+      btf.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+        .then(() => {
+          pangu.autoSpacingPage()
+        })
+    }
   }
-}
 
-function panguInit () {
-  if (false){
-    GLOBAL_CONFIG_SITE.isPost && panguFn()
-  } else {
-    panguFn()
+  const panguInit = () => {
+    if (false){
+      GLOBAL_CONFIG_SITE.isPost && panguFn()
+    } else {
+      panguFn()
+    }
   }
-}
 
-document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  btf.addGlobalFn('pjaxComplete', panguInit, 'pangu')
+  document.addEventListener('DOMContentLoaded', panguInit)
+})()</script><div class="js-pjax"><script>(() => {
   let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
 
-  const initWaline = (Fn) => {
-    const waline = Fn(Object.assign({
-      el: '#waline-wrap',
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
       serverURL: 'https://waline.yeding.top',
       pageview: false,
       dark: 'html[data-theme="dark"]',
-      path: window.location.pathname,
       comment: false,
-    }, null))
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
 
-    const destroyWaline = () => {
-      waline.destroy()
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
     }
-
-    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
   }
 
-  const loadWaline = async () => {
-    if (initFn) initWaline(initFn)
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
     else {
-      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.1.2/dist/waline.min.css')
-      const { init } = await import('https://cdn.jsdelivr.net/npm/@waline/client@3.1.2/dist/waline.min.js')
-      initFn = init || Waline.init
-      initWaline(initFn)
-      window.walineFn = initFn
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
     }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
   }
 
   if ('Waline' === 'Waline' || !false) {
@@ -214,117 +228,125 @@ document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-
   } else {
     window.loadOtherComment = loadWaline
   }
-})()</script><script>(()=>{
-  const getGiscusTheme = theme => {
-    return theme === 'dark' ? 'dark' : 'light'
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
   }
 
-  const loadGiscus = () => {
-    const config = Object.assign({
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
       src: 'https://giscus.app/client.js',
       'data-repo': 'Lost-Swords/Lost-Swords.github.io',
       'data-repo-id': 'MDEwOlJlcG9zaXRvcnkzNjUxNTM1Njc=',
       'data-category-id': 'DIC_kwDOFcPNH84CTkRO',
-      'data-mapping': 'pathname',
       'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
       'data-reactions-enabled': '1',
       crossorigin: 'anonymous',
-      async: true
-    },null)
-
-    const ele = document.createElement('script')
-    for (let key in config) {
-      ele.setAttribute(key, config[key])
+      async: true,
+      ...option,
+      ...mappingConfig
     }
-    document.getElementById('giscus-wrap').appendChild(ele)
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
   }
 
   const changeGiscusTheme = theme => {
-    const sendMessage = message => {
-      const iframe = document.querySelector('iframe.giscus-frame')
-      if (!iframe) return
-      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
-    }
-
-    sendMessage({
-      setConfig: {
-        theme: getGiscusTheme(theme)
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
       }
-    });
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
   }
 
   btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Waline' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
 
   if ('Waline' === 'Giscus' || !false) {
     if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
     else loadGiscus()
   } else {
-    window.loadOtherComment= loadGiscus
+    window.loadOtherComment = loadGiscus
   }
-})()</script></div><script src="https://testingcf.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+})()</script></div><script src="https://testingcf.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 
-var pjax = new Pjax({
-  elements: 'a:not([target="_blank"]):not([href="/secret/"])',
-  selectors: pjaxSelectors,
-  cacheBust: false,
-  analytics: false,
-  scrollRestoration: false
-})
-
-document.addEventListener('pjax:send', function () {
-
-  // removeEventListener
-  btf.removeGlobalFnEvent('pjax')
-  btf.removeGlobalFnEvent('themeChange')
-
-  document.getElementById('rightside').classList.remove('rightside-show')
-  
-  if (window.aplayers) {
-    for (let i = 0; i < window.aplayers.length; i++) {
-      if (!window.aplayers[i].options.fixed) {
-        window.aplayers[i].destroy()
-      }
-    }
-  }
-
-  typeof typed === 'object' && typed.destroy()
-
-  //reset readmode
-  const $bodyClassList = document.body.classList
-  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
-
-  typeof disqusjs === 'object' && disqusjs.destroy()
-})
-
-document.addEventListener('pjax:complete', function () {
-  window.refreshFn()
-
-  document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([href="/secret/"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
   })
 
-  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
-
-  typeof panguInit === 'function' && panguInit()
-
-  // google analytics
-  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
-
-  // baidu analytics
-  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
-
-  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
-
-  // prismjs
-  typeof Prism === 'object' && Prism.highlightAll()
-})
-
-document.addEventListener('pjax:error', e => {
-  if (e.request.status === 404) {
-    pjax.loadUrl('/404.html')
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
   }
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
